@@ -1,11 +1,15 @@
 package com.portafolio.control.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "usuario")
+
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +24,19 @@ public class Usuario {
     @Column(name = "pass")
     private String password;
 
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_roles",
+               joinColumns = {
+            @JoinColumn(name = "usuario_id",referencedColumnName = "usuario_id")
+
+    },
+            inverseJoinColumns = {
+            @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
+            }
+
+    )
+    @JsonManagedReference
+    private Set<Rol> roles;
     public Usuario() {
     }
 
@@ -69,5 +86,13 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 }
