@@ -1,4 +1,4 @@
-package com.portafolio.control.servicio;
+package com.portafolio.control.servicio.usuario;
 
 import com.portafolio.control.modelo.Usuario;
 
