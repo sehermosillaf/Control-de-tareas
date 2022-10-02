@@ -43,7 +43,6 @@ public class Usuario {
     private Set<Rol> roles;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-
     @JsonBackReference
     private List<Tarea> tareas;
 }
