@@ -1,6 +1,7 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
@@ -32,6 +33,6 @@ public class Tarea {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Usuario usuario;
 }

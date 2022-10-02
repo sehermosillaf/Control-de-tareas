@@ -1,5 +1,6 @@
 package com.portafolio.control.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import javax.persistence.*;
@@ -42,6 +43,7 @@ public class Usuario {
     private Set<Rol> roles;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    @JsonManagedReference
+
+    @JsonBackReference
     private List<Tarea> tareas;
 }
