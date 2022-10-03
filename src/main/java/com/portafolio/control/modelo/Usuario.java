@@ -1,12 +1,10 @@
 package com.portafolio.control.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -17,10 +15,11 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonDeserialize
+
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="USER_SEQ", sequenceName="USER_SEQ", allocationSize=100)
     @Column(name = "usuario_id")
     private Long id;
     @Column(name = "nombre")
@@ -43,10 +42,12 @@ public class Usuario {
             }
 
     )
-    @JsonBackReference
-    private Set<Rol> roles;
-
-    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
+    private List<Rol> roles;
+
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
+    @JsonBackReference
+    @JsonIgnore
     private List<Tarea> tareas;
 }

@@ -33,7 +33,6 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
         Usuario usuarioNuevo = usuarioRepo.save(usuario);
         return new ResponseEntity<>(usuarioNuevo, HttpStatus.CREATED);
-
     }
 
 
