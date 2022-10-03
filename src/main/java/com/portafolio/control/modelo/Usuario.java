@@ -1,7 +1,10 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonDeserialize
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +43,10 @@ public class Usuario {
             }
 
     )
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Rol> roles;
 
     @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Tarea> tareas;
 }

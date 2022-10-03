@@ -3,6 +3,8 @@ package com.portafolio.control.controlador;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +26,9 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerUsuarioPorID(id); //Todo:Add custom exception
     }
 
-    @PostMapping//Todo:Corregir peticiones POST, genera conflicto con Spring security
-    public Usuario guardarUsuario(@RequestBody Usuario usuario) {
-        return servicioUsuario.guardarUsuario(usuario);
+    @PostMapping(consumes = {"application/json"})
+    public ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
+        return servicioUsuario.agregarUsuario(usuario);
     }
+
 }

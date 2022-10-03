@@ -2,6 +2,7 @@ package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonDeserialize
 public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,6 @@ public class Tarea {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @JsonManagedReference
+    @JsonBackReference
     private Usuario usuario;
 }
