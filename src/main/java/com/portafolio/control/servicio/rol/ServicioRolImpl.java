@@ -3,7 +3,6 @@ package com.portafolio.control.servicio.rol;
 import com.portafolio.control.modelo.Rol;
 import com.portafolio.control.repositorio.IRolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

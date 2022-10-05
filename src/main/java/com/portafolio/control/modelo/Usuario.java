@@ -1,22 +1,22 @@
 package com.portafolio.control.modelo;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
-
-
 @Entity
 @Table(name = "usuario")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Usuario {
+@JsonIgnoreProperties(value = {"roles","tareas"})
+public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name="USER_SEQ", sequenceName="USER_SEQ", allocationSize=100)
@@ -31,7 +31,7 @@ public class Usuario {
     @Column(name = "pass")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,targetEntity = Rol.class)
     @JoinTable(name = "usuario_roles",
                joinColumns = {
             @JoinColumn(name = "usuario_id",referencedColumnName = "usuario_id")
@@ -40,14 +40,9 @@ public class Usuario {
             inverseJoinColumns = {
             @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
             }
-
     )
-    @JsonManagedReference
-    @JsonIgnore
     private List<Rol> roles;
 
-    @OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER)
-    @JsonBackReference
-    @JsonIgnore
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class)
     private List<Tarea> tareas;
 }
