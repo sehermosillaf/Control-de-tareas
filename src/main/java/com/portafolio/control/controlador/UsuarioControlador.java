@@ -3,6 +3,7 @@ package com.portafolio.control.controlador;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,20 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerUsuarioPorID(id); //Todo:Add custom exception
     }
     @PostMapping
-    @ResponseBody public void agregarUsuario(@RequestBody Usuario usuario) {
+    @ResponseBody
+    public void agregarUsuario(@RequestBody Usuario usuario) {
         servicioUsuario.agregarUsuario(usuario);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return servicioUsuario.actualizarUsuario(id,usuario);
+    }
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long id) {
+        return servicioUsuario.eliminarUsuario(id);
     }
 
 }

@@ -16,7 +16,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(value = {"usuario"})
 public class Tarea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -39,6 +38,5 @@ public class Tarea implements Serializable {
 
     @ManyToOne(targetEntity = Usuario.class)
     @JoinColumn(name = "usuario_id")
-    @JsonIgnoreProperties(value = "tareas")
     private Usuario usuario;
 }

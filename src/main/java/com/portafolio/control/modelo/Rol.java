@@ -24,8 +24,7 @@ public class Rol implements Serializable{
     @Column(name = "nombre")
     private String nombre;
 
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY, targetEntity = Usuario.class)
-
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY, targetEntity = Usuario.class, cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JsonIgnoreProperties(value = {"roles"})
     private List<Usuario> usuarios;

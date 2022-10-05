@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.HttpStatus.*;
+
 @Service
 public class ServicioUsuarioImpl implements IServicioUsuario{
     @Autowired
@@ -32,7 +34,26 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
     @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
         Usuario usuarioNuevo = usuarioRepo.save(usuario);
-        return new ResponseEntity<>(usuarioNuevo, HttpStatus.CREATED);
+        return new ResponseEntity<>(usuarioNuevo, CREATED);
+    }
+
+    @Override
+    public ResponseEntity<Usuario> actualizarUsuario(Long id,Usuario usuario) {
+        Usuario usuarioActualizado = usuarioRepo.findById(id).orElse(null);//Todo:Crear excepcion personalizada
+        usuarioActualizado.setNombre(usuario.getNombre());
+        usuarioActualizado.setApellido(usuario.getApellido());
+        usuarioActualizado.setEmail(usuario.getEmail());
+        usuarioActualizado.setPassword(usuario.getPassword());
+        usuarioActualizado.setRoles(usuario.getRoles());
+        usuarioRepo.save(usuarioActualizado);
+        return ResponseEntity.ok(usuarioActualizado);
+    }
+
+    @Override
+    public ResponseEntity<Usuario> eliminarUsuario(Long id) {
+        Usuario usuarioPorEliminar = usuarioRepo.findById(id).orElse(null); //Todo:Crear excepcion personalizada
+        usuarioRepo.delete(usuarioPorEliminar);
+        return ResponseEntity.ok(usuarioPorEliminar);
     }
 
 

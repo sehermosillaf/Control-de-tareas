@@ -12,4 +12,9 @@ public interface IServicioUsuario {
     Optional<Usuario> obtenerUsuarioPorID(Long id);
 
     ResponseEntity<Usuario> agregarUsuario(Usuario usuario);
+
+    ResponseEntity<Usuario> actualizarUsuario(Long id,Usuario usuario);
+
+    ResponseEntity<Usuario> eliminarUsuario(Long id);
+
 }
