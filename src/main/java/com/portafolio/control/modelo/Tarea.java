@@ -19,6 +19,7 @@ import java.util.Date;
 public class Tarea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="SEQ_TSK", sequenceName="SEQ_TSK")//Todo:Reemplazar por Sequence para tareas
     @Column(name = "id_tarea")
     private Long id;
 

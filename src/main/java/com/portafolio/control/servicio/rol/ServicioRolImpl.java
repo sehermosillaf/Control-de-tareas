@@ -5,6 +5,7 @@ import com.portafolio.control.repositorio.IRolRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
 
@@ -30,6 +31,15 @@ public class ServicioRolImpl implements IServicioRol{
         rolActualizado.setNombre(rol.getNombre());
         rolRepo.save(rolActualizado);
         return ResponseEntity.ok(rolActualizado);
+    }
+    @Override
+    public ResponseEntity<Rol> eliminarRol(Long id) {
+        Rol rolPorEliminar = rolRepo.findById(id).orElse(null);//Todo:Crear Exception personalizada
+        if(rolPorEliminar == null) {
+            return (ResponseEntity<Rol>) ResponseEntity.notFound();
+        }
+        rolRepo.delete(rolPorEliminar);
+        return ResponseEntity.ok(rolPorEliminar);
     }
 
 

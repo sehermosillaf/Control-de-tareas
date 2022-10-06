@@ -3,6 +3,7 @@ package com.portafolio.control.controlador;
 import com.portafolio.control.modelo.Tarea;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,13 @@ public class TareaControlador {
         return servicioTarea.obtenerTareaPorID(id);
     }
     @PostMapping
+    @ResponseBody
     public void agregarTarea(@RequestBody Tarea tarea){
         servicioTarea.guardarTarea(tarea);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Tarea> eliminarTarea(@PathVariable Long id){
+        return servicioTarea.eliminarTarea(id);
     }
 }

@@ -11,5 +11,5 @@ public interface IServicioRol {
     Rol agregarRol(Rol rol);
 
     ResponseEntity<Rol> actualizarRol(Long id,Rol rol);
-
+    ResponseEntity<Rol> eliminarRol(Long id);
 }

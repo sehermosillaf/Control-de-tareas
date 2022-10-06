@@ -16,4 +16,6 @@ public interface IServicioTarea {
 
     ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
+    ResponseEntity<Tarea> eliminarTarea(Long id);
+
 }

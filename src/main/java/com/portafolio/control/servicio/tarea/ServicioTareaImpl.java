@@ -33,5 +33,15 @@ public class ServicioTareaImpl  implements IServicioTarea{
         Tarea tareaNueva = tareaRepo.save(tarea);
         return new ResponseEntity<>(tareaNueva, CREATED);
     }
+    @Override
+    public ResponseEntity<Tarea> eliminarTarea(Long id) {
+        Tarea tareaPorEliminar = tareaRepo.findById(id).orElse(null);
+        if(tareaPorEliminar == null) {
+            return (ResponseEntity<Tarea>) ResponseEntity.notFound();
+        }
+        tareaRepo.delete(tareaPorEliminar);
+        return ResponseEntity.ok(tareaPorEliminar);
+    }
+
 
 }
