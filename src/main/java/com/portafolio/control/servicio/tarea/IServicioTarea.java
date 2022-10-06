@@ -1,6 +1,8 @@
 package com.portafolio.control.servicio.tarea;
 
 import com.portafolio.control.modelo.Tarea;
+import com.portafolio.control.modelo.Usuario;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +14,6 @@ public interface IServicioTarea {
 
     Optional<Tarea> obtenerTareaPorID(Long id);
 
-    Tarea guardarTarea(Tarea tarea);
+    ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
 }
