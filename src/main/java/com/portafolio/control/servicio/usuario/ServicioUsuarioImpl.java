@@ -48,7 +48,6 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
         usuarioRepo.save(usuarioActualizado);
         return ResponseEntity.ok(usuarioActualizado);
     }
-
     @Override
     public ResponseEntity<Usuario> eliminarUsuario(Long id) {
         Usuario usuarioPorEliminar = usuarioRepo.findById(id).orElse(null); //Todo:Crear excepcion personalizada
