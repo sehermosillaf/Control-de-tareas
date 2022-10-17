@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,8 @@ public class UsuarioControlador {
     }
     @PostMapping
     @ResponseBody
-    public void agregarUsuario(@RequestBody Usuario usuario) {
-        servicioUsuario.agregarUsuario(usuario);
+    public  ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
+        return servicioUsuario.agregarUsuario(usuario);
     }
 
     @PutMapping("/{id}")

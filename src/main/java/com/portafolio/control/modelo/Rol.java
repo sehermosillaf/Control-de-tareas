@@ -16,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIgnoreProperties
 public class Rol implements Serializable{
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="ROL_SEQ", sequenceName="ROL_SEQ", allocationSize=100)
     @Column(name = "rol_id")
     private Long id;
     @Column(name = "nombre")

@@ -17,9 +17,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tarea implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="SEQ_TSK", sequenceName="SEQ_TSK")//Todo:Reemplazar por Sequence para tareas
     @Column(name = "id_tarea")
     private Long id;
 
@@ -29,13 +29,20 @@ public class Tarea implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name = "fecha_creacion")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaCreacion;
+
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaInicio;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_termino")
     private Date fechaTermino;
+
+    @Column(name = "estado")
+    private Byte estado; //relacionado al progeso
 
     @ManyToOne(targetEntity = Usuario.class)
     @JoinColumn(name = "usuario_id")

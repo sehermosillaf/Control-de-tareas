@@ -19,10 +19,12 @@ public class TareaControlador {
     public List<Tarea> obtenerTodasLasTareas() {
         return servicioTarea.obtenerTodasLasTareas();
     }
+
     @GetMapping("/{id}")
     public Optional<Tarea> obtenerTareaPorID(@PathVariable Long id) {
         return servicioTarea.obtenerTareaPorID(id);
     }
+
     @PostMapping
     @ResponseBody
     public void agregarTarea(@RequestBody Tarea tarea){
