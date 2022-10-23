@@ -1,6 +1,7 @@
 package com.portafolio.control.modelo;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,26 +9,23 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "tarea")
+@Table(name = "tarea_subordinada")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(value = "subtareas")
-public class Tarea implements Serializable {
+
+public class TareaSubordinada implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_tarea")
+    @Column(name = "id_subtarea")
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre_subtarea")
     private String nombre;
 
     @Column(name = "descripcion")
@@ -45,14 +43,7 @@ public class Tarea implements Serializable {
     @Column(name = "fecha_termino")
     private Date fechaTermino;
 
-    @ManyToOne(targetEntity = Usuario.class)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     @ManyToOne
-    @JoinColumn(name = "id_estado")
-    private Estado estado;
-
-    @OneToMany(mappedBy = "tarea")
-    private Set<TareaSubordinada> subtareas;
+    @JoinColumn(name = "tarea_id_tarea", referencedColumnName = "id_tarea")
+    private Tarea tarea;
 }

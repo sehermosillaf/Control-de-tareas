@@ -5,24 +5,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "empresas")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Estado implements Serializable {
+public class Empresa implements Serializable {
 
     @Id
-    @Column(name = "id_estado")
     private Long id;
     private String nombre;
-    private String descripcion;
-
-    @OneToMany(mappedBy = "estado",fetch = FetchType.LAZY)
-    private List<Tarea> tareas;
+    private String direccion;
+    private String correo;
+    private String rubro;
 }

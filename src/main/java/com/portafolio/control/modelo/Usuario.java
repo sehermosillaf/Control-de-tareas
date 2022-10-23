@@ -44,7 +44,6 @@ public class Usuario implements Serializable {
             @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
             }
     )
-
     private List<Rol> roles;
 
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class)
