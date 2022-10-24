@@ -7,22 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "cargo")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Estado implements Serializable {
-
+public class Cargo implements Serializable {
     @Id
-    @Column(name = "id_estado")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
-
-    @OneToMany(mappedBy = "estado")
-    private List<Tarea> tarea;
+    private String descripcion;
 
 }

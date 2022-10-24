@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.*;
 import java.io.Serializable;
 
 @Entity
@@ -24,4 +26,8 @@ public class Empresa implements Serializable {
     private String direccion;
     private String correo;
     private String rubro;
+
+    @OneToMany(mappedBy = "empresa")
+    private List<Unidad> unidades;
+
 }

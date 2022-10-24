@@ -1,6 +1,7 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,7 @@ public class Usuario implements Serializable {
             }
     )
     private List<Rol> roles;
+    @JsonIgnore
 
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class,cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;

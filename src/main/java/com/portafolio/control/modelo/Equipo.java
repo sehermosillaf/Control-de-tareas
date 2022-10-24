@@ -6,23 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "equipo")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Estado implements Serializable {
+public class Equipo implements Serializable {
 
     @Id
-    @Column(name = "id_estado")
     private Long id;
+    @Column(name = "nombre_equipo")
     private String nombre;
+    private String descripcion;
 
-    @OneToMany(mappedBy = "estado")
-    private List<Tarea> tarea;
-
+    @OneToMany(mappedBy = "equipo")
+    private List<FlujoTareas> flujos;
 }

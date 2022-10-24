@@ -7,22 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "proceso")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Estado implements Serializable {
-
+public class FlujoTareas implements Serializable {
     @Id
-    @Column(name = "id_estado")
     private Long id;
     private String nombre;
-
-    @OneToMany(mappedBy = "estado")
-    private List<Tarea> tarea;
-
+    @ManyToOne
+    @JoinColumn(name = "equipo_id")
+    private Equipo equipo;
 }

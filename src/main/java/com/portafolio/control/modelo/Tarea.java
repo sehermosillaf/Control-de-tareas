@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
 import java.io.Serializable;
 import java.util.*;
 
@@ -14,7 +15,6 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tarea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,8 +44,11 @@ public class Tarea implements Serializable {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @ManyToOne(targetEntity = Estado.class,cascade = CascadeType.ALL)
+    @JoinColumn(name = "tarea")
+    private Estado estado;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 

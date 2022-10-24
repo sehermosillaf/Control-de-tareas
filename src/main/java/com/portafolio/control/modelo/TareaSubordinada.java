@@ -15,7 +15,6 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TareaSubordinada implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,7 +42,7 @@ public class TareaSubordinada implements Serializable {
     private Date fechaTermino;
 
 
-
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "tarea_id_tarea", referencedColumnName = "id_tarea")
     private Tarea tarea;

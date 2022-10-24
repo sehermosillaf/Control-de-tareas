@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "unidad")
@@ -22,5 +20,7 @@ public class Unidad {
     private Long id;
     private String nombre;
     private String descripcion;
-    private String funcion;
+    @ManyToOne
+    @JoinColumn(name = "unidades")
+    private Empresa empresa;
 }
