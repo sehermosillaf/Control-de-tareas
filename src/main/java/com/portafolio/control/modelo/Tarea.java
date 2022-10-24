@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Tarea implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tarea")
     private Long id;
 

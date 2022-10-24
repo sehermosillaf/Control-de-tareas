@@ -17,8 +17,12 @@ import java.util.List;
 @JsonIgnoreProperties
 public class Rol implements Serializable{
     @Id
+<<<<<<< Updated upstream
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name="ROL_SEQ", sequenceName="ROL_SEQ", allocationSize=100)
+=======
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> Stashed changes
     @Column(name = "rol_id")
     private Long id;
     @Column(name = "nombre")

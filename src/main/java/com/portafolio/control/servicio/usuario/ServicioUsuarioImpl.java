@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,7 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
     private IUsuarioRepo usuarioRepo;
 
     @Autowired
-    private IRolRepo rolRepo;
-
+    private ModelMapper modelMapper;
     @Override
     public List<Usuario> obtenerTodosUsuarios() {
         return usuarioRepo.findAll();
