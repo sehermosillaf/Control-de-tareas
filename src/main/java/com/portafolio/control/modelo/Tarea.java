@@ -1,25 +1,20 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tarea")
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(value = "subtareas")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tarea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,14 +40,26 @@ public class Tarea implements Serializable {
     @Column(name = "fecha_termino")
     private Date fechaTermino;
 
-    @ManyToOne(targetEntity = Usuario.class)
+    @ManyToOne(targetEntity = Usuario.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_estado")
-    private Estado estado;
 
-    @OneToMany(mappedBy = "tarea")
-    private Set<TareaSubordinada> subtareas;
+
+    @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<TareaSubordinada> subtareas;
+
+    //Corrige conflictos entre Lambok y Set de tareas
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tarea)) return false;
+        Tarea tarea = (Tarea) o;
+        return getId().equals(tarea.getId()) && getNombre().equals(tarea.getNombre()) && getDescripcion().equals(tarea.getDescripcion()) && getFechaCreacion().equals(tarea.getFechaCreacion()) && getFechaInicio().equals(tarea.getFechaInicio()) && getFechaTermino().equals(tarea.getFechaTermino()) && getUsuario().equals(tarea.getUsuario()) && getSubtareas().equals(tarea.getSubtareas());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuario(), getSubtareas());
+    }
 }

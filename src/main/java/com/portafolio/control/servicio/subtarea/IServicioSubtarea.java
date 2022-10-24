@@ -10,11 +10,13 @@ public interface IServicioSubtarea {
 
     List<TareaSubordinada> obtenerSubtareas();
 
-    ResponseEntity<TareaSubordinada> guardarSubtarea(TareaSubordinada subtarea);
+    ResponseEntity<TareaSubordinada> guardarSinAsignarSubtarea(TareaSubordinada subtarea);
+
+//    ResponseEntity<TareaSubordinada> guardarYAsignar(TareaSubordinada subtarea);
 
     ResponseEntity<TareaSubordinada> eliminarSubtarea(Long id);
 
-    Optional<TareaSubordinada> subtareaPorID(Long id);
+    Optional<TareaSubordinada> obtenerSubtareaPorID(Long id);
 
     ResponseEntity<TareaSubordinada> actualizarSubtarea(Long id,TareaSubordinada subtarea);
 }

@@ -56,10 +56,10 @@ public class ServicioTareaImpl  implements IServicioTarea{
 
     @Override
     public ResponseEntity<Tarea> actualizarTarea(Long id,Tarea tarea) {
-        Tarea tareaPorActualizar = tareaRepo.findById(id).orElse(null);//Todo:Crear excepcion personalizada
+        //Todo:Crear excepcion personalizada
+        Tarea tareaPorActualizar = tareaRepo.findById(id).orElse(null);
         tareaPorActualizar.setNombre(tarea.getNombre());
         tareaPorActualizar.setDescripcion(tarea.getDescripcion());
-        tareaPorActualizar.setEstado(tarea.getEstado());
         tareaPorActualizar.setSubtareas(tarea.getSubtareas());
         tareaPorActualizar.setFechaInicio(tarea.getFechaInicio());
         tareaPorActualizar.setFechaTermino(tarea.getFechaTermino());

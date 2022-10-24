@@ -33,7 +33,7 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
 
     @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
-        Usuario usuarioNuevo = usuarioRepo.save(usuario);
+        Usuario usuarioNuevo = usuarioRepo.saveAndFlush(usuario);
         return new ResponseEntity<>(usuarioNuevo, CREATED);
     }
 

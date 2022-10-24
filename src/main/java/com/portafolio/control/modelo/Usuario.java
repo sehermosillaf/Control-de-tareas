@@ -23,6 +23,7 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="id_seq", sequenceName="id_seq")
     @Column(name = "usuario_id")
     private Long id;
     @Column(name = "nombre")
@@ -46,6 +47,6 @@ public class Usuario implements Serializable {
     )
     private List<Rol> roles;
 
-    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class)
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class,cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
 }

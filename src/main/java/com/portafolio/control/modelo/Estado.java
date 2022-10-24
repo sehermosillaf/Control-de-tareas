@@ -23,6 +23,4 @@ public class Estado implements Serializable {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(mappedBy = "estado",fetch = FetchType.LAZY)
-    private List<Tarea> tareas;
 }

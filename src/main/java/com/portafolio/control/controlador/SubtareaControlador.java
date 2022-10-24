@@ -2,7 +2,6 @@ package com.portafolio.control.controlador;
 
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.servicio.subtarea.IServicioSubtarea;
-import com.portafolio.control.servicio.subtarea.ServicioSubtareaImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +21,23 @@ public class SubtareaControlador {
     }
     @GetMapping("/{id}")
     public Optional<TareaSubordinada> obtenerTareasSubordinadas(@PathVariable Long id) {
-        return servicioSubtarea.subtareaPorID(id);
+        return servicioSubtarea.obtenerSubtareaPorID(id);
     }
     @PostMapping
     @ResponseBody
     public void agregarSubTarea(@RequestBody TareaSubordinada subtarea) {
-        servicioSubtarea.guardarSubtarea(subtarea);
+        servicioSubtarea.guardarSinAsignarSubtarea(subtarea);
     }
 
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<TareaSubordinada> actualizarTareaSubordianda(@PathVariable Long id, @RequestBody TareaSubordinada subtarea) {
         return servicioSubtarea.actualizarSubtarea(id,subtarea);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TareaSubordinada> eliminarTareaPorID(@PathVariable Long id) {
+        return servicioSubtarea.eliminarSubtarea(id);
     }
 
 

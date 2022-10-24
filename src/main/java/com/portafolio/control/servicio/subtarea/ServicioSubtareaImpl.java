@@ -22,13 +22,13 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
     }
 
     @Override
-    public Optional<TareaSubordinada> subtareaPorID(Long id) {
+    public Optional<TareaSubordinada> obtenerSubtareaPorID(Long id) {
         return subtareaRepo.findById(id);
     }
 
     @Override
     public ResponseEntity<TareaSubordinada> actualizarSubtarea(Long id, TareaSubordinada subtarea) {
-        TareaSubordinada subtareaPorActualizar = subtareaRepo.findById(id).orElse(new TareaSubordinada());
+        TareaSubordinada subtareaPorActualizar = subtareaRepo.findById(id).get();
         subtareaPorActualizar.setDescripcion(subtarea.getDescripcion());
         subtareaPorActualizar.setNombre(subtarea.getNombre());
         subtareaPorActualizar.setFechaInicio(subtarea.getFechaInicio());
@@ -39,14 +39,27 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
     }
 
     @Override
-    public ResponseEntity<TareaSubordinada> guardarSubtarea(TareaSubordinada subtarea) {
+    public ResponseEntity<TareaSubordinada> guardarSinAsignarSubtarea(TareaSubordinada subtarea) {
         TareaSubordinada nuevaSubtrea = subtareaRepo.save(subtarea);
         return new ResponseEntity<>(nuevaSubtrea,CREATED);
     }
 
+//    @Override
+//    public ResponseEntity<TareaSubordinada> guardarYAsignar(TareaSubordinada subtarea,Long id) {
+//        TareaSubordinada nuevaSubTarea = new TareaSubordinada();
+//        nuevaSubTarea.setId(subtarea.getId());
+//        nuevaSubTarea.setNombre(subtarea.getNombre());
+//        nuevaSubTarea.setDescripcion(subtarea.getDescripcion());
+//        nuevaSubTarea.setFechaCreacion(subtarea.getFechaCreacion());
+//        nuevaSubTarea.setFechaInicio(subtarea.getFechaInicio());
+//        nuevaSubTarea.setFechaTermino(subtarea.getFechaTermino());
+//        nuevaSubTarea.setTarea(subtarea.getTarea().);
+//        return null;
+//    }
+
     @Override
     public ResponseEntity<TareaSubordinada> eliminarSubtarea(Long id) {
-        TareaSubordinada subtareaPorEliminar = subtareaRepo.findById(id).orElse(null);
+        TareaSubordinada subtareaPorEliminar = subtareaRepo.findById(id).get();
         if (subtareaPorEliminar == null) {
             return (ResponseEntity<TareaSubordinada>) ResponseEntity.notFound();
         }
