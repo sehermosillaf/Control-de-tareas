@@ -15,6 +15,7 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tarea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,6 +41,7 @@ public class Tarea implements Serializable {
     @Column(name = "fecha_termino")
     private Date fechaTermino;
 
+
     @ManyToOne(targetEntity = Usuario.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -51,6 +53,11 @@ public class Tarea implements Serializable {
     @JsonManagedReference
     @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
+
+
+    @ManyToOne
+    @JoinColumn(name = "tarjeta" )
+    private Tarjeta tarjeta;
 
     //Corrige conflictos entre Lambok y Set de tareas
     @Override

@@ -1,9 +1,6 @@
 package com.portafolio.control.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +16,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties(value = "tareas")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="id_seq", sequenceName="id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "usuario_id")
     private Long id;
     @Column(name = "nombre")
@@ -47,8 +44,14 @@ public class Usuario implements Serializable {
             }
     )
     private List<Rol> roles;
-    @JsonIgnore
 
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class,cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_cargo")
+    private Cargo cargo;
+
 }
