@@ -6,6 +6,8 @@ import com.portafolio.control.repositorio.IUsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,9 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
     @Autowired
     private IUsuarioRepo usuarioRepo;
 
-    @Autowired
-    private IRolRepo rolRepo;
+
+    PasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
     @Override
     public List<Usuario> obtenerTodosUsuarios() {
@@ -33,7 +36,9 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
 
     @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
-        Usuario usuarioNuevo = usuarioRepo.saveAndFlush(usuario);
+        String encodedPass = this.encoder.encode(usuario.getPassword());
+        usuario.setPassword(encodedPass);
+        Usuario usuarioNuevo = usuarioRepo.save(usuario);
         return new ResponseEntity<>(usuarioNuevo, CREATED);
     }
 

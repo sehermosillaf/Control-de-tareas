@@ -18,10 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "usuario_id")
     private Long id;
     @Column(name = "nombre")
@@ -32,7 +31,7 @@ public class Usuario implements Serializable {
     private String email;
     @Column(name = "pass")
     private String password;
-
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,targetEntity = Rol.class)
     @JoinTable(name = "usuario_roles",
                joinColumns = {
@@ -44,12 +43,11 @@ public class Usuario implements Serializable {
             }
     )
     private List<Rol> roles;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class,cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
 
-
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_cargo")
     private Cargo cargo;
