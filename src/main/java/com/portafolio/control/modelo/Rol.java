@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Rol implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -24,14 +23,10 @@ public class Rol implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "rol_id")
     private Long id;
-
     @Column(name = "nombre")
-    @NonNull
     private String nombre;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER, targetEntity = Usuario.class)
     @JsonBackReference
     private List<Usuario> usuarios;
-
-
 }

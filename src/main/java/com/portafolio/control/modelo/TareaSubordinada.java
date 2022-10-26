@@ -47,6 +47,7 @@ public class TareaSubordinada implements Serializable {
     @JoinColumn(name = "tarea_id_tarea", referencedColumnName = "id_tarea")
     private Tarea tarea;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
