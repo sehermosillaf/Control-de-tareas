@@ -65,17 +65,17 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
-    public Boolean validate(String email, String password) {
+    public String validateCredentials(String email, String password) {
         Usuario usuario = usuarioRepo.findUsuarioByEmail(email);
-
-        if(!usuarioRepo.existsByEmail(email)){
-            return false;
+        //Match entre la passw raw con la encoded
+        try{
+        if(this.encoder.matches(password, usuario.getPassword())){
+            return "Usuario valido: " + usuario.getId();
         }
-
-        if(!this.encoder.matches(password, usuario.getPassword())){
-            return false;
+        } catch (Exception e) {
+            return "Mail no existe";
         }
-        return true;
+        return "Login invalido";
     }
 
 

@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/users")
 public class UsuarioControlador {
     @Autowired
@@ -44,11 +42,9 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public String login(@RequestBody Usuario usuario) {
-        if(servicioUsuario.validate(usuario.getEmail(),usuario.getPassword())) {
-            return "Login validado";
-        };
-        return "Login invalido";
+        return servicioUsuario.validateCredentials(usuario.getEmail(),usuario.getPassword());
     }
 
 }
