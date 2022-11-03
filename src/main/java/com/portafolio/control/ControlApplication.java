@@ -14,5 +14,4 @@ public class ControlApplication {
 		SpringApplication.run(ControlApplication.class, args);
 	}
 
-
 }

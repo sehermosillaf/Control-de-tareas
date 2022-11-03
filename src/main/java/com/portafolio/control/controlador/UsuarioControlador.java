@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 public class UsuarioControlador {
     @Autowired
@@ -33,13 +34,21 @@ public class UsuarioControlador {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,Usuario usuario) {
         return servicioUsuario.actualizarUsuario(id,usuario);
     }
     @DeleteMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long id) {
         return servicioUsuario.eliminarUsuario(id);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Usuario usuario) {
+        if(servicioUsuario.validate(usuario.getEmail(),usuario.getPassword())) {
+            return "Login validado";
+        };
+        return "Login invalido";
     }
 
 }

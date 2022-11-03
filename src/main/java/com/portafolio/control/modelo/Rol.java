@@ -26,7 +26,7 @@ public class Rol implements Serializable{
     @Column(name = "nombre")
     private String nombre;
 
-    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER, targetEntity = Usuario.class)
+    @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Usuario> usuarios;
 }

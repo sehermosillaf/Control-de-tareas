@@ -27,12 +27,12 @@ public class Usuario implements Serializable {
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Column(name = "pass")
     private String password;
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,targetEntity = Rol.class)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_roles",
                joinColumns = {
             @JoinColumn(name = "usuario_id",referencedColumnName = "usuario_id")
@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
     )
     private List<Rol> roles;
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY, targetEntity = Tarea.class,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
 
     @JsonIgnore

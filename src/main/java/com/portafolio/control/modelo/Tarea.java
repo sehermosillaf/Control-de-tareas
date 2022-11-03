@@ -42,7 +42,7 @@ public class Tarea implements Serializable {
     private Date fechaTermino;
 
 
-    @ManyToOne(targetEntity = Usuario.class,cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

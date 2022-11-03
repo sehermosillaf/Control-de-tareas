@@ -6,17 +6,21 @@ import com.portafolio.control.repositorio.IUsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.*;
 
 @Service
-public class ServicioUsuarioImpl implements IServicioUsuario{
+public class ServicioUsuarioImpl implements IServicioUsuario {
     @Autowired
     private IUsuarioRepo usuarioRepo;
 
@@ -59,6 +63,21 @@ public class ServicioUsuarioImpl implements IServicioUsuario{
         usuarioRepo.delete(usuarioPorEliminar);
         return ResponseEntity.ok(usuarioPorEliminar);
     }
+
+    @Override
+    public Boolean validate(String email, String password) {
+        Usuario usuario = usuarioRepo.findUsuarioByEmail(email);
+
+        if(!usuarioRepo.existsByEmail(email)){
+            return false;
+        }
+
+        if(!this.encoder.matches(password, usuario.getPassword())){
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
