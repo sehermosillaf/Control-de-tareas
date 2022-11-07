@@ -3,6 +3,7 @@ package com.portafolio.control.controlador;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class UsuarioControlador {
 
     @PutMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,Usuario usuario) {
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
         return servicioUsuario.actualizarUsuario(id,usuario);
     }
     @DeleteMapping("/{id}")
@@ -41,10 +42,9 @@ public class UsuarioControlador {
         return servicioUsuario.eliminarUsuario(id);
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login",produces=MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String login(@RequestBody Usuario usuario) {
-        return servicioUsuario.validateCredentials(usuario.getEmail(),usuario.getPassword());
+    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
+        return servicioUsuario.validateCredentials(usuario.getEmail(), usuario.getPassword());
     }
-
 }

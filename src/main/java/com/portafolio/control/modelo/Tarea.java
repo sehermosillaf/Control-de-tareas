@@ -50,7 +50,7 @@ public class Tarea implements Serializable {
     @JoinColumn(name = "tarea")
     private Estado estado;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 

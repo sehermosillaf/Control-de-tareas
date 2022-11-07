@@ -4,26 +4,25 @@ import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.repositorio.IRolRepo;
 import com.portafolio.control.repositorio.IUsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class ServicioUsuarioImpl implements IServicioUsuario {
     @Autowired
     private IUsuarioRepo usuarioRepo;
 
+    @Autowired
+    IRolRepo rolRepo;
 
     PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -47,16 +46,21 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
-    public ResponseEntity<Usuario> actualizarUsuario(Long id,Usuario usuario) {
-        Usuario usuarioActualizado = usuarioRepo.findById(id).orElse(null);//Todo:Crear excepcion personalizada
+    public ResponseEntity<Usuario> actualizarUsuario(Long id, Usuario usuario) {
+        Usuario usuarioActualizado = usuarioRepo.findById(id).orElseThrow(RuntimeException::new);//Todo:Crear excepcion personalizada\
+        String encodedPass = this.encoder.encode(usuario.getPassword());
         usuarioActualizado.setNombre(usuario.getNombre());
         usuarioActualizado.setApellido(usuario.getApellido());
         usuarioActualizado.setEmail(usuario.getEmail());
-        usuarioActualizado.setPassword(usuario.getPassword());
+        usuarioActualizado.setPassword(encodedPass);
         usuarioActualizado.setRoles(usuario.getRoles());
+        usuarioActualizado.setEnabled(usuario.getEnabled());
         usuarioRepo.save(usuarioActualizado);
         return ResponseEntity.ok(usuarioActualizado);
+
     }
+
+
     @Override
     public ResponseEntity<Usuario> eliminarUsuario(Long id) {
         Usuario usuarioPorEliminar = usuarioRepo.findById(id).orElse(null); //Todo:Crear excepcion personalizada
@@ -65,19 +69,19 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
-    public String validateCredentials(String email, String password) {
+    public ResponseEntity<?> validateCredentials(String email, String password) {
         Usuario usuario = usuarioRepo.findUsuarioByEmail(email);
+        Byte enabled = usuario.getEnabled();
+        String roles = usuario.getRoles().stream().map(Object::toString).collect(Collectors.joining(", "));
         //Match entre la passw raw con la encoded
-        try{
-        if(this.encoder.matches(password, usuario.getPassword())){
-            return "Usuario valido: " + usuario.getId();
-        }
+        try {
+            if (this.encoder.matches(password, usuario.getPassword())) {
+                return ResponseEntity.ok("{\"response\":\"Login valido.\",\n" + "\"enabled\":\"" + usuario.getId() + "\"}");
+            }
         } catch (Exception e) {
-            return "Mail no existe";
+            return ResponseEntity.status(NOT_FOUND).body("{\"error\":\"Error1\"}");
         }
-        return "Login invalido";
+        return ResponseEntity.status(NOT_FOUND).body("{\"error\":\"Error\"}");
     }
-
-
 
 }

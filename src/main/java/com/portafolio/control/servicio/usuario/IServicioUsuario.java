@@ -17,7 +17,7 @@ public interface IServicioUsuario {
 
     ResponseEntity<Usuario> eliminarUsuario(Long id);
 
-    String validateCredentials(String email, String password);
+    ResponseEntity<?> validateCredentials(String email, String password);
 
 
 }
