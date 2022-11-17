@@ -18,8 +18,9 @@ import java.io.Serializable;
 public class Equipo implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_equipo")
     private Long id;
-    @Column(name = "nombre_equipo")
     private String nombre;
     private String descripcion;
 

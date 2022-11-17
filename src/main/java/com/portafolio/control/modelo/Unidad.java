@@ -1,5 +1,6 @@
 package com.portafolio.control.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,10 @@ public class Unidad {
     private Long id;
     private String nombre;
     private String descripcion;
+    private String funcion;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "unidades")
+    @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 }

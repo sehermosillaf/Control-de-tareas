@@ -16,10 +16,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TareaSubordinada implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="id_seq", sequenceName="id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_subtarea")
     private Long id;
 
@@ -44,9 +42,8 @@ public class TareaSubordinada implements Serializable {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name = "tarea_id_tarea", referencedColumnName = "id_tarea")
+    @JoinColumn(name = "id_tarea")
     private Tarea tarea;
-
 
     @Override
     public boolean equals(Object o) {

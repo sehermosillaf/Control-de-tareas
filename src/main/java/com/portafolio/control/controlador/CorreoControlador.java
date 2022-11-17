@@ -16,5 +16,4 @@ public class CorreoControlador {
     public void sendMail(){
         correo.SendEmail("se.hermosillaf@gmail.com", "testing","testing desde spring");
     }
-
 }

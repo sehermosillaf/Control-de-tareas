@@ -54,4 +54,8 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "id_cargo")
     private Cargo cargo;
 
+    @ManyToOne
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
+
 }

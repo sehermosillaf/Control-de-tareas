@@ -16,8 +16,19 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class FlujoTareas implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "tareas")
+    private Tarea tareas;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
+
     @ManyToOne
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;

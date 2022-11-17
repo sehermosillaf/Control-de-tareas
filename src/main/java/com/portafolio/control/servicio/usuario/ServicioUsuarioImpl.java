@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -44,7 +43,6 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
         Usuario usuarioNuevo = usuarioRepo.save(usuario);
         return new ResponseEntity<>(usuarioNuevo, CREATED);
     }
-
     @Override
     public ResponseEntity<Usuario> actualizarUsuario(Long id, Usuario usuario) {
         Usuario usuarioActualizado = usuarioRepo.findById(id).orElseThrow(RuntimeException::new);//Todo:Crear excepcion personalizada\
@@ -57,7 +55,6 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
         usuarioActualizado.setEnabled(usuario.getEnabled());
         usuarioRepo.save(usuarioActualizado);
         return ResponseEntity.ok(usuarioActualizado);
-
     }
 
 
@@ -71,17 +68,15 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     @Override
     public ResponseEntity<?> validateCredentials(String email, String password) {
         Usuario usuario = usuarioRepo.findUsuarioByEmail(email);
-        Byte enabled = usuario.getEnabled();
-        String roles = usuario.getRoles().stream().map(Object::toString).collect(Collectors.joining(", "));
         //Match entre la passw raw con la encoded
         try {
             if (this.encoder.matches(password, usuario.getPassword())) {
-                return ResponseEntity.ok("{\"response\":\"Login valido.\",\n" + "\"enabled\":\"" + usuario.getId() + "\"}");
+                return ResponseEntity.ok(usuario);
             }
         } catch (Exception e) {
-            return ResponseEntity.status(NOT_FOUND).body("{\"error\":\"Error1\"}");
+            return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
         }
-        return ResponseEntity.status(NOT_FOUND).body("{\"error\":\"Error\"}");
+        return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
     }
 
 }

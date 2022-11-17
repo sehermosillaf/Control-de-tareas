@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.*;
 import java.io.Serializable;
 
@@ -21,13 +18,15 @@ import java.io.Serializable;
 public class Empresa implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_empresa")
     private Long id;
     private String nombre;
     private String direccion;
     private String correo;
     private String rubro;
 
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Unidad> unidades;
 
 }

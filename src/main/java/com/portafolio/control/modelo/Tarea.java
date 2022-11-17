@@ -15,11 +15,9 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tarea implements Serializable {
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tarea")
     private Long id;
 
@@ -49,8 +47,7 @@ public class Tarea implements Serializable {
     @ManyToOne(targetEntity = Estado.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "tarea")
     private Estado estado;
-
-
+    @JsonIgnore
     @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 

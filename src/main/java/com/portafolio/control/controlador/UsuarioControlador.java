@@ -30,7 +30,6 @@ public class UsuarioControlador {
     public  ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
         return servicioUsuario.agregarUsuario(usuario);
     }
-
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {
@@ -41,7 +40,6 @@ public class UsuarioControlador {
     public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long id) {
         return servicioUsuario.eliminarUsuario(id);
     }
-
     @PostMapping(value = "/login",produces=MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
