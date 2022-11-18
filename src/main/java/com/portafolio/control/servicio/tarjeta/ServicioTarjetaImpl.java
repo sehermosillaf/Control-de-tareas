@@ -30,7 +30,6 @@ public class ServicioTarjetaImpl implements IServicioTarjeta{
        Tarjeta nuevaTarjeta = tarjetaRepo.save(tarjeta);
         return ResponseEntity.ok(nuevaTarjeta);
     }
-
 //    @Override
 //    public ResponseEntity<Tarjeta> actualizarTarjeta(Long id, Tarjeta tarjeta) {
 //        return null;

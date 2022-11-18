@@ -40,7 +40,7 @@ public class TareaSubordinada implements Serializable {
     private Date fechaTermino;
 
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "id_tarea")
     private Tarea tarea;
@@ -52,7 +52,6 @@ public class TareaSubordinada implements Serializable {
         TareaSubordinada that = (TareaSubordinada) o;
         return getId().equals(that.getId()) && getNombre().equals(that.getNombre()) && getDescripcion().equals(that.getDescripcion()) && getFechaCreacion().equals(that.getFechaCreacion()) && getFechaInicio().equals(that.getFechaInicio()) && getFechaTermino().equals(that.getFechaTermino()) && getTarea().equals(that.getTarea());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getTarea());

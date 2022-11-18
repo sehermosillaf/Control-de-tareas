@@ -1,6 +1,7 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.*;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,9 +46,7 @@ public class Usuario implements Serializable {
     )
     private List<Rol> roles;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Collection<Tarea> tareas;
 
     @JsonIgnore

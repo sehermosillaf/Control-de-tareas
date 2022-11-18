@@ -1,11 +1,14 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.*;
+import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.print.attribute.standard.MediaSize;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -15,6 +18,12 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@NamedStoredProcedureQueries(
+        {@NamedStoredProcedureQuery(name = "updateEstado",
+                procedureName = "SP_AVANCE_TAREA"
+        )
+        })
 public class Tarea implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,30 +37,27 @@ public class Tarea implements Serializable {
     private String descripcion;
 
     @Column(name = "fecha_creacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_termino")
-    private Date fechaTermino;
+    private LocalDate fechaTermino;
 
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    private Usuario usuarioResponsable;
 
     @ManyToOne(targetEntity = Estado.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "tarea")
+    @JoinColumn(name = "estado_id")
     private Estado estado;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "tarjeta" )
     private Tarjeta tarjeta;
@@ -62,11 +68,11 @@ public class Tarea implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Tarea)) return false;
         Tarea tarea = (Tarea) o;
-        return getId().equals(tarea.getId()) && getNombre().equals(tarea.getNombre()) && getDescripcion().equals(tarea.getDescripcion()) && getFechaCreacion().equals(tarea.getFechaCreacion()) && getFechaInicio().equals(tarea.getFechaInicio()) && getFechaTermino().equals(tarea.getFechaTermino()) && getUsuario().equals(tarea.getUsuario()) && getSubtareas().equals(tarea.getSubtareas());
+        return getId().equals(tarea.getId()) && getNombre().equals(tarea.getNombre()) && getDescripcion().equals(tarea.getDescripcion()) && getFechaCreacion().equals(tarea.getFechaCreacion()) && getFechaInicio().equals(tarea.getFechaInicio()) && getFechaTermino().equals(tarea.getFechaTermino()) && getUsuarioResponsable().equals(tarea.getUsuarioResponsable()) && getSubtareas().equals(tarea.getSubtareas());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuario(), getSubtareas());
+        return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuarioResponsable(), getSubtareas());
     }
 }

@@ -19,5 +19,6 @@ public interface IServicioTarea {
 
     ResponseEntity<Tarea> actualizarTarea(Long id, Tarea tarea);
 
+    void actualizarEstadoTarea();
 
 }

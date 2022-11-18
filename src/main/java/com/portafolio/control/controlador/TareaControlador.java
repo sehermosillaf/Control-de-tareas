@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,6 @@ import java.util.Optional;
 public class TareaControlador {
     @Autowired
     private IServicioTarea servicioTarea;
-
 
     @GetMapping
     public List<Tarea> obtenerTodasLasTareas() {
@@ -44,5 +44,9 @@ public class TareaControlador {
     @ResponseBody
     public ResponseEntity<Tarea> actualizarTarea(@PathVariable Long id,@RequestBody Tarea tarea) {
         return servicioTarea.actualizarTarea(id,tarea);
+    }
+    @PutMapping("/estado")
+    public void actualizarEstado() {
+        servicioTarea.actualizarEstadoTarea();
     }
 }

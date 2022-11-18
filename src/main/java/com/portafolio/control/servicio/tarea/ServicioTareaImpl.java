@@ -1,18 +1,21 @@
 package com.portafolio.control.servicio.tarea;
 
+import com.portafolio.control.modelo.Estado;
 import com.portafolio.control.modelo.Tarea;
-import com.portafolio.control.modelo.Usuario;
+import com.portafolio.control.repositorio.IEstadoRepo;
 import com.portafolio.control.repositorio.ITareaRepo;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
+import com.portafolio.control.servicio.estado.ServicioEstadoImpl;
+import com.portafolio.control.servicio.mail.EnvioMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.rmi.ServerException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.HttpStatus.CREATED;
 
 @Service
 public class ServicioTareaImpl  implements IServicioTarea{
@@ -21,7 +24,16 @@ public class ServicioTareaImpl  implements IServicioTarea{
     private ITareaRepo tareaRepo;
 
     @Autowired
+    private IEstadoRepo estadoRepo;
+
+    @Autowired
+    private ServicioEstadoImpl servicioEstado;
+
+    @Autowired
     private ITareaSubordiandaRepo tareaSubordiandaRepo;
+
+    @Autowired
+    private EnvioMail email;
 
     @Override
     public List<Tarea> obtenerTodasLasTareas() {
@@ -35,11 +47,11 @@ public class ServicioTareaImpl  implements IServicioTarea{
 
     @Override
     public ResponseEntity<Tarea> guardarTarea(Tarea tarea) {
-        Tarea tareaNueva = tareaRepo.save(tarea);
-        if(tareaNueva == null) {
-            return (ResponseEntity<Tarea>) ResponseEntity.notFound();
+        if(tarea != null){
+            Tarea tareaBody = tareaRepo.save(tarea);
+            return ResponseEntity.ok(tareaBody);
         } else {
-            return new ResponseEntity<>(tareaNueva, CREATED);
+            return (ResponseEntity<Tarea>) ResponseEntity.notFound();
         }
 
     }
@@ -57,19 +69,21 @@ public class ServicioTareaImpl  implements IServicioTarea{
     @Override
     public ResponseEntity<Tarea> actualizarTarea(Long id,Tarea tarea) {
         //Todo:Crear excepcion personalizada
-        Tarea tareaPorActualizar = tareaRepo.findById(id).orElse(null);
+        Tarea tareaPorActualizar = tareaRepo.findById(id).get();
         tareaPorActualizar.setNombre(tarea.getNombre());
         tareaPorActualizar.setDescripcion(tarea.getDescripcion());
         tareaPorActualizar.setSubtareas(tarea.getSubtareas());
+        tareaPorActualizar.setEstado(tarea.getEstado());
         tareaPorActualizar.setFechaInicio(tarea.getFechaInicio());
         tareaPorActualizar.setFechaTermino(tarea.getFechaTermino());
         tareaRepo.save(tareaPorActualizar);
         return ResponseEntity.ok(tarea);
     }
 
-
-
-
+    @Override
+    public void actualizarEstadoTarea() {
+        tareaRepo.actualizarEstado();
+    }
 
 
 }

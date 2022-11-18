@@ -1,6 +1,8 @@
 package com.portafolio.control.controlador;
 
 import com.portafolio.control.modelo.Usuario;
+import com.portafolio.control.servicio.estado.IServicioEstado;
+import com.portafolio.control.servicio.tarea.IServicioTarea;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,6 +18,8 @@ public class UsuarioControlador {
     @Autowired
     private IServicioUsuario servicioUsuario;
 
+    @Autowired
+    IServicioTarea servicioTarea;
     @GetMapping
     public List<Usuario> obtenerTodosUsuarios(){
         return servicioUsuario.obtenerTodosUsuarios();
@@ -45,4 +49,5 @@ public class UsuarioControlador {
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
         return servicioUsuario.validateCredentials(usuario.getEmail(), usuario.getPassword());
     }
+
 }
