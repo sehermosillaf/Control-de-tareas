@@ -5,6 +5,7 @@ import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.estado.IServicioEstado;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
+import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,11 +37,20 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerAdmins();
     }
 
+    @GetMapping("/func")
+    public List<?> obtenerFunc() {
+        return servicioUsuario.obtenerFunc();
+    }
+
     @PostMapping
     @ResponseBody
     public  ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
         return servicioUsuario.agregarUsuario(usuario);
     }
+    @PostMapping(value = "/register", produces=MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> agregarUsuarioConRoles(@RequestBody UsuarioAdminDTO usuarioDTO) {
+        return servicioUsuario.agregarUsuarioConRoles(usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), usuarioDTO.getPass(), usuarioDTO.getEnabled(), usuarioDTO.getUnidadID(), usuarioDTO.getRol_id());    }
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {

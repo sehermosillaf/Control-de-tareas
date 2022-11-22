@@ -9,12 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class UsuarioAdminDTO {
-
-    private int id;
     private String nombre;
     private String apellido;
     private String email;
     private String pass;
-    private int rol_id;
+    private Byte enabled;
+    private Long unidadID;
+    private Long rol_id;
 
 }

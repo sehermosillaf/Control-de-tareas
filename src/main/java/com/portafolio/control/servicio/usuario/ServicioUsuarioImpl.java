@@ -37,10 +37,20 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
+    public ResponseEntity<?> agregarUsuarioConRoles(String nombre,String apellido,String email,String pass, Byte enabled,Long unidadID,Long idRol) {
+        Usuario user = usuarioRepo.insertarUsuarioConRoles(nombre,apellido,email,pass,enabled,unidadID,idRol);
+        return ResponseEntity.ok(user);
+    }
+
+    @Override
     public List<?> obtenerAdmins() {
         return usuarioRepo.findAdminUsers();
     }
 
+    @Override
+    public List<?> obtenerFunc() {
+        return usuarioRepo.findFuncUsers();
+    }
     @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
         String encodedPass = this.encoder.encode(usuario.getPassword());

@@ -11,7 +11,11 @@ public interface IServicioUsuario {
 
     Optional<Usuario> obtenerUsuarioPorID(Long id);
 
+    ResponseEntity<?> agregarUsuarioConRoles(String nombre,String apellido,String email,String pass, Byte enabled,Long unidadID,Long idRol);
+
     List<?> obtenerAdmins();
+
+    List<?> obtenerFunc();
 
     ResponseEntity<Usuario> agregarUsuario(Usuario usuario);
 
