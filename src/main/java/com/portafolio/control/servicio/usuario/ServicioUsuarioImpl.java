@@ -76,7 +76,7 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
         } catch (Exception e) {
             return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
         }
-        return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
+        return (ResponseEntity<?>) ResponseEntity.status(NOT_FOUND);
     }
 
 }

@@ -35,27 +35,27 @@ public class Usuario implements Serializable {
     @Column(name = "enabled")
     private Byte enabled;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_roles",
             joinColumns = {
-                    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
+                    @JoinColumn(name = "usuario_id")
             },
             inverseJoinColumns = {
-                    @JoinColumn(name = "rol_id", referencedColumnName = "rol_id")
+                    @JoinColumn(name = "rol_id")
             }
     )
     private List<Rol> roles;
 
-    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "id_cargo")
+    @JoinColumn(name = "id_cargo",referencedColumnName = "id_cargo")
     private Cargo cargo;
 
     @ManyToOne
-    @JoinColumn(name = "id_empresa")
+    @JoinColumn(name = "id_empresa",referencedColumnName = "id_empresa")
     private Empresa empresa;
 
 }
