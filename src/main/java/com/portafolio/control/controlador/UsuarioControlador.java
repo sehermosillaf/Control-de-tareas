@@ -1,5 +1,6 @@
 package com.portafolio.control.controlador;
 
+import com.portafolio.control.dto.UsuarioAdminDTO;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.estado.IServicioEstado;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
@@ -29,6 +30,12 @@ public class UsuarioControlador {
     public Optional<Usuario> obtenerUsuarioPorID(@PathVariable Long id){
         return servicioUsuario.obtenerUsuarioPorID(id); //Todo:Add custom exception
     }
+
+    @GetMapping("/admins")
+    public List<?> obtenerAdmins() {
+        return servicioUsuario.obtenerAdmins();
+    }
+
     @PostMapping
     @ResponseBody
     public  ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
@@ -49,5 +56,7 @@ public class UsuarioControlador {
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
         return servicioUsuario.validateCredentials(usuario.getEmail(), usuario.getPassword());
     }
+
+
 
 }

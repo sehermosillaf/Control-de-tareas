@@ -11,6 +11,8 @@ public interface IServicioUsuario {
 
     Optional<Usuario> obtenerUsuarioPorID(Long id);
 
+    List<?> obtenerAdmins();
+
     ResponseEntity<Usuario> agregarUsuario(Usuario usuario);
 
     ResponseEntity<Usuario> actualizarUsuario(Long id,Usuario usuario);

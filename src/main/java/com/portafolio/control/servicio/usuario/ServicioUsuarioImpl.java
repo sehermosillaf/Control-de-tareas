@@ -37,6 +37,11 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
+    public List<?> obtenerAdmins() {
+        return usuarioRepo.findAdminUsers();
+    }
+
+    @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
         String encodedPass = this.encoder.encode(usuario.getPassword());
         usuario.setPassword(encodedPass);
@@ -76,7 +81,7 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
         } catch (Exception e) {
             return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
         }
-        return (ResponseEntity<?>) ResponseEntity.status(NOT_FOUND);
+        return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
     }
 
 }
