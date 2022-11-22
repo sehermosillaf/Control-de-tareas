@@ -55,7 +55,6 @@ public class Usuario implements Serializable {
     private Cargo cargo;
 
     @ManyToOne
-    @JoinColumn(name = "id_empresa",referencedColumnName = "id_empresa")
-    private Empresa empresa;
-
+    @JoinColumn(name = "id_unidad",referencedColumnName = "id_unidad")
+    private Unidad unidad;
 }

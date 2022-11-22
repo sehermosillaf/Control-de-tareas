@@ -24,6 +24,10 @@ public class Unidad {
     private String funcion;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "unidad")
+    private List<Tarea> tareas;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;

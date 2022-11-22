@@ -62,6 +62,10 @@ public class Tarea implements Serializable {
     @JoinColumn(name = "tarjeta" )
     private Tarjeta tarjeta;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_unidad")
+    private Unidad unidad;
     //Corrige conflictos entre Lambok y Set de tareas
     @Override
     public boolean equals(Object o) {
@@ -70,7 +74,6 @@ public class Tarea implements Serializable {
         Tarea tarea = (Tarea) o;
         return getId().equals(tarea.getId()) && getNombre().equals(tarea.getNombre()) && getDescripcion().equals(tarea.getDescripcion()) && getFechaCreacion().equals(tarea.getFechaCreacion()) && getFechaInicio().equals(tarea.getFechaInicio()) && getFechaTermino().equals(tarea.getFechaTermino()) && getUsuarioResponsable().equals(tarea.getUsuarioResponsable()) && getSubtareas().equals(tarea.getSubtareas());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuarioResponsable(), getSubtareas());
