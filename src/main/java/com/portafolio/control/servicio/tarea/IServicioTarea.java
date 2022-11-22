@@ -13,6 +13,8 @@ public interface IServicioTarea {
 
     Optional<Tarea> obtenerTareaPorID(Long id);
 
+    List<Tarea> obtenerTareasPorUsuario(Long id);
+
     ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
     ResponseEntity<Tarea> eliminarTarea(Long id);

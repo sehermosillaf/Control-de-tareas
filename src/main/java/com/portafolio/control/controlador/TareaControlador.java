@@ -27,6 +27,10 @@ public class TareaControlador {
         return servicioTarea.obtenerTareaPorID(id);
     }
 
+    @GetMapping("/user/{id}")
+    public List<Tarea> obtenerTareasPorUsuario(@PathVariable Long id) {
+        return servicioTarea.obtenerTareasPorUsuario(id);
+    }
     @PostMapping
     @ResponseBody
     public void agregarTarea(@RequestBody Tarea tarea){

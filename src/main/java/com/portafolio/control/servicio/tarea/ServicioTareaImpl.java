@@ -46,6 +46,11 @@ public class ServicioTareaImpl  implements IServicioTarea{
     }
 
     @Override
+    public List<Tarea> obtenerTareasPorUsuario(Long id) {
+        return tareaRepo.findTareasByUsuarioResponsable(id);
+    }
+
+    @Override
     public ResponseEntity<Tarea> guardarTarea(Tarea tarea) {
         if(tarea != null){
             Tarea tareaBody = tareaRepo.save(tarea);

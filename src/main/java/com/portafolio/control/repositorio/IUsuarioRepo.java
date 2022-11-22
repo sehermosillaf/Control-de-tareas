@@ -14,4 +14,5 @@ import java.util.*;
 public interface IUsuarioRepo extends JpaRepository<Usuario, Long> {
     Boolean existsByEmail(String email);
     Usuario findUsuarioByEmail(String email);
+    
 }
