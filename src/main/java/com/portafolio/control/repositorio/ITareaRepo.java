@@ -14,7 +14,11 @@ import java.util.*;
 public interface ITareaRepo extends JpaRepository<Tarea,Long> {
     @Procedure(name = "updateEstado")
     void actualizarEstado();
+    @Query(nativeQuery = true,value = "select * from tarea where usuario_id = ?1")
+    List<Tarea> findTareasByUsuarioResponsable( Long id);
 
-    @Query(nativeQuery = true,value = "select * from tarea where usuario_id = :id")
-    List<Tarea> findTareasByUsuarioResponsable(@Param("id") Long id);
+    @Procedure(name = "INSERTAR_TAREA")
+    void insertarTarea(@Param("P_NOMBRE")String nombre,@Param("P_DESCRIPCION")String descripcion,
+                       @Param("P_FECHA_CREACION")Date fechaCreacion,@Param("P_FECHA_INICIO")Date fechaInicio,
+                       @Param("P_FECHA_TERMINO")Date fechaTermino,@Param("P_USUARIO_ID")Long usuarioResponsable);
 }

@@ -61,6 +61,7 @@ public class Usuario implements Serializable {
     )
     private List<Rol> roles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuarioResponsable", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Tarea> tareas;
 

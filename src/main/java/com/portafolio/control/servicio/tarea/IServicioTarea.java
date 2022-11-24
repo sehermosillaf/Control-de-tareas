@@ -1,5 +1,6 @@
 package com.portafolio.control.servicio.tarea;
 
+import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Tarea;
 import org.springframework.http.ResponseEntity;
 
@@ -17,6 +18,7 @@ public interface IServicioTarea {
 
     ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
+    void insertarTarea(TareaDTO tareaDTO);
     ResponseEntity<Tarea> eliminarTarea(Long id);
 
     ResponseEntity<Tarea> actualizarTarea(Long id, Tarea tarea);

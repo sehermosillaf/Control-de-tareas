@@ -3,6 +3,7 @@ package com.portafolio.control.modelo;
 import com.fasterxml.jackson.annotation.*;
 import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.*;
+import oracle.sql.DATE;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -22,7 +23,19 @@ import java.util.*;
 @NamedStoredProcedureQueries(
         {@NamedStoredProcedureQuery(name = "updateEstado",
                 procedureName = "SP_AVANCE_TAREA"
-        )
+        ),
+                @NamedStoredProcedureQuery(
+                        name = "INSERTAR_TAREA",
+                        procedureName = "SP_INSERTAR_TAREA",
+                        parameters = {
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_DESCRIPCION", type = String.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_CREACION", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_INICIO", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_TERMINO", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_ID", type = Long.class),
+                        }
+                )
         })
 public class Tarea implements Serializable {
     @Id
@@ -36,36 +49,38 @@ public class Tarea implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_creacion")
-    private LocalDate fechaCreacion;
-
+    private Date fechaCreacion;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_inicio")
-    private LocalDate fechaInicio;
-
+    private Date fechaInicio;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_termino")
-    private LocalDate fechaTermino;
+    private Date fechaTermino;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioResponsable;
 
-    @ManyToOne(targetEntity = Estado.class,cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Estado.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
-    @OneToMany(mappedBy = "tarea",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tarea", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "tarjeta" )
+    @JoinColumn(name = "tarjeta")
     private Tarjeta tarjeta;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_unidad")
     private Unidad unidad;
+
     //Corrige conflictos entre Lambok y Set de tareas
     @Override
     public boolean equals(Object o) {
@@ -74,6 +89,7 @@ public class Tarea implements Serializable {
         Tarea tarea = (Tarea) o;
         return getId().equals(tarea.getId()) && getNombre().equals(tarea.getNombre()) && getDescripcion().equals(tarea.getDescripcion()) && getFechaCreacion().equals(tarea.getFechaCreacion()) && getFechaInicio().equals(tarea.getFechaInicio()) && getFechaTermino().equals(tarea.getFechaTermino()) && getUsuarioResponsable().equals(tarea.getUsuarioResponsable()) && getSubtareas().equals(tarea.getSubtareas());
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuarioResponsable(), getSubtareas());

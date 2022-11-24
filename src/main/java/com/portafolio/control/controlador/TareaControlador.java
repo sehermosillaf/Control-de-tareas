@@ -1,5 +1,6 @@
 package com.portafolio.control.controlador;
 
+import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Tarea;
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
@@ -37,6 +38,10 @@ public class TareaControlador {
         servicioTarea.guardarTarea(tarea);
     }
 
+    @PostMapping("/add")
+    public void insertarTarea(@RequestBody TareaDTO tareaDTO) {
+        servicioTarea.insertarTarea(tareaDTO);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Tarea> eliminarTarea(@PathVariable Long id){

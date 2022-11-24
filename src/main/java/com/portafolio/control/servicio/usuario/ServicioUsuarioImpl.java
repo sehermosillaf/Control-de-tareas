@@ -1,5 +1,6 @@
 package com.portafolio.control.servicio.usuario;
 
+import com.portafolio.control.dto.UsuarioFuncDTO;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.repositorio.IRolRepo;
 import com.portafolio.control.repositorio.IUsuarioRepo;
@@ -46,11 +47,16 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     public List<?> obtenerAdmins() {
         return usuarioRepo.findAdminUsers();
     }
-
     @Override
-    public List<?> obtenerFunc() {
+    public List<UsuarioFuncDTO> obtenerFunc() {
         return usuarioRepo.findFuncUsers();
     }
+
+    @Override
+    public String buscarEmailPorID(Long id) {
+        return usuarioRepo.findEmailbyUsuarioID(id);
+    }
+
     @Override
     public ResponseEntity<Usuario> agregarUsuario(Usuario usuario) {
         String encodedPass = this.encoder.encode(usuario.getPassword());

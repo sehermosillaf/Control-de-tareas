@@ -1,6 +1,7 @@
 package com.portafolio.control.controlador;
 
 import com.portafolio.control.dto.UsuarioAdminDTO;
+import com.portafolio.control.dto.UsuarioFuncDTO;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.estado.IServicioEstado;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
@@ -32,13 +33,18 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerUsuarioPorID(id); //Todo:Add custom exception
     }
 
+    @GetMapping("/mail/{id}")
+    public String obtenerMailPorID(@PathVariable Long id){
+        return servicioUsuario.buscarEmailPorID(id);
+    }
+
     @GetMapping("/admins")
     public List<?> obtenerAdmins() {
         return servicioUsuario.obtenerAdmins();
     }
 
     @GetMapping("/func")
-    public List<?> obtenerFunc() {
+    public List<UsuarioFuncDTO> obtenerFunc() {
         return servicioUsuario.obtenerFunc();
     }
 

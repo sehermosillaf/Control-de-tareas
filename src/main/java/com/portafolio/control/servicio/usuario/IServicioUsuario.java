@@ -1,5 +1,6 @@
 package com.portafolio.control.servicio.usuario;
 
+import com.portafolio.control.dto.UsuarioFuncDTO;
 import com.portafolio.control.modelo.Usuario;
 import org.springframework.http.ResponseEntity;
 
@@ -15,7 +16,9 @@ public interface IServicioUsuario {
 
     List<?> obtenerAdmins();
 
-    List<?> obtenerFunc();
+    List<UsuarioFuncDTO> obtenerFunc();
+
+    String buscarEmailPorID(Long id);
 
     ResponseEntity<Usuario> agregarUsuario(Usuario usuario);
 

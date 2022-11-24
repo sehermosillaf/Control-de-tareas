@@ -17,8 +17,16 @@ public class EnvioMail {
         email.setText(content);
         mail.send(email);
     }
+    public void tareaAsignada(String correo) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(correo);
+        email.setSubject("Nueva tarea");
+        email.setText("Tiene una nueva tarea asignada con nombre");
+        mail.send(email);
+    }
 
     public void alertaAtraso(String correo){
+
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(correo);
         email.setSubject("Alerta atraso");
