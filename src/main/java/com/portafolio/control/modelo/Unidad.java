@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "unidad")
+@Table(name = "unidades")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,6 +18,7 @@ import java.util.*;
 public class Unidad {
     @Id
     @Column(name = "id_unidad")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String descripcion;
@@ -27,7 +28,7 @@ public class Unidad {
     @OneToMany(mappedBy = "unidad")
     private List<Tarea> tareas;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;

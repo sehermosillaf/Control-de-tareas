@@ -1,5 +1,6 @@
 package com.portafolio.control.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Empresa implements Serializable {
     private String correo;
     private String rubro;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Unidad> unidades;
 

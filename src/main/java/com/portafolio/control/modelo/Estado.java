@@ -20,11 +20,11 @@ public class Estado implements Serializable {
 
     @Id
     @Column(name = "id_estado")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private Float porcentaje;
     @JsonIgnore
     @OneToMany(mappedBy = "estado")
     private List<Tarea> tarea;
-
 }
