@@ -65,7 +65,7 @@ public class ServicioTareaImpl implements IServicioTarea {
         String correo = usuarioRepo.findEmailbyUsuarioID(tareaDTO.getUsuarioResponsable());
         System.out.println(correo);
         String asunto = "Tiene una nueva tarea asignada";
-        String contenido = "Tarea con nombre" + tareaDTO.getNombre() + "con plazo de inicio " + tareaDTO.getFechaInicio() + " y fecha de termino limite " + tareaDTO.getFechaTermino() + " ";
+        String contenido = "Tarea con nombre " + tareaDTO.getNombre() + " con plazo de inicio " + tareaDTO.getFechaInicio() + " y fecha de termino limite " + tareaDTO.getFechaTermino() + " ";
         email.SendEmail(correo,asunto,contenido);
         } catch(Exception e) {
         }

@@ -2,6 +2,7 @@ package com.portafolio.control.repositorio;
 
 import com.portafolio.control.dto.UsuarioAdminDTO;
 import com.portafolio.control.dto.UsuarioFuncDTO;
+import com.portafolio.control.dto.UsuarioRolesDTO;
 import com.portafolio.control.modelo.Rol;
 import com.portafolio.control.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,13 +24,14 @@ public interface IUsuarioRepo extends JpaRepository<Usuario, Long> {
     List<?> findAdminUsers();
     @Query(value = "SELECT U.USUARIO_ID,U.NOMBRE || ' ' || U.APELLIDO AS NOMBRE_COMPLETO,U.EMAIL,U.PASS,R.ROL_ID FROM USUARIOS U JOIN USUARIO_ROLES R ON U.USUARIO_ID = R.USUARIO_ID WHERE R.ROL_ID = 2", nativeQuery = true)
     List<UsuarioFuncDTO> findFuncUsers();
-    @Procedure(name = "crear_usuario_roles")
-    Usuario insertarUsuarioConRoles(@Param("P_NOMBRE") String nombre,@Param("P_APELLIDO") String apellido,
-                          @Param("P_EMAIL") String email,
-                          @Param("P_PASS") String pass,
-                          @Param("P_ENABLED") Byte enabled,
-                          @Param("P_ID_UNIDAD") Long idunidad,
-                          @Param("P_ROL_ID") Long rol_id);
+    @Procedure(name = "SP_INSERT_USER_ROLE")
+    void insertarUsuarioConRoles(@Param("P_NOMBRE") String nombre,
+                                 @Param("P_APELLIDO") String apellido,
+                                 @Param("P_EMAIL") String email,
+                                 @Param("P_PASS") String pass,
+                                 @Param("P_ENABLED") Byte enabled,
+                                 @Param("P_ID_UNIDAD") Long idunidad,
+                                 @Param("P_ROL_ID") Long rolid);
     @Query(value = "SELECT EMAIL FROM USUARIOS WHERE USUARIO_ID = :id",nativeQuery = true)
     String findEmailbyUsuarioID(@Param("id") Long id);
 }

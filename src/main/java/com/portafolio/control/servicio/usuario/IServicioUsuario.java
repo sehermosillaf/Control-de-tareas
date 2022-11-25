@@ -1,6 +1,7 @@
 package com.portafolio.control.servicio.usuario;
 
 import com.portafolio.control.dto.UsuarioFuncDTO;
+import com.portafolio.control.dto.UsuarioRolesDTO;
 import com.portafolio.control.modelo.Usuario;
 import org.springframework.http.ResponseEntity;
 
@@ -12,7 +13,7 @@ public interface IServicioUsuario {
 
     Optional<Usuario> obtenerUsuarioPorID(Long id);
 
-    ResponseEntity<?> agregarUsuarioConRoles(String nombre,String apellido,String email,String pass, Byte enabled,Long unidadID,Long idRol);
+    void agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO);
 
     List<?> obtenerAdmins();
 

@@ -2,6 +2,7 @@ package com.portafolio.control.controlador;
 
 import com.portafolio.control.dto.UsuarioAdminDTO;
 import com.portafolio.control.dto.UsuarioFuncDTO;
+import com.portafolio.control.dto.UsuarioRolesDTO;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.servicio.estado.IServicioEstado;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
@@ -53,10 +54,11 @@ public class UsuarioControlador {
     public  ResponseEntity<Usuario> agregarUsuario(@RequestBody Usuario usuario) {
         return servicioUsuario.agregarUsuario(usuario);
     }
-    @PostMapping(value = "/register", produces=MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register")
     @ResponseBody
-    public ResponseEntity<?> agregarUsuarioConRoles(@RequestBody UsuarioAdminDTO usuarioDTO) {
-        return servicioUsuario.agregarUsuarioConRoles(usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), usuarioDTO.getPass(), usuarioDTO.getEnabled(), usuarioDTO.getUnidadID(), usuarioDTO.getRol_id());    }
+    public void agregarUsuarioConRoles(@RequestBody UsuarioRolesDTO user) {
+        servicioUsuario.agregarUsuarioConRoles(user);
+    }
     @PutMapping("/{id}")
     @ResponseBody
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id,@RequestBody Usuario usuario) {

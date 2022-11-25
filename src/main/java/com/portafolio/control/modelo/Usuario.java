@@ -20,14 +20,14 @@ import java.util.List;
 @NoArgsConstructor
 @NamedStoredProcedureQueries({
         @NamedStoredProcedureQuery(
-                name = "crear_usuario_roles",
+                name = "SP_INSERT_USER_ROLE",
                 procedureName = "SP_INSERT_USER_ROLE",
                 parameters = {
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_NOMBRE", type=String.class),
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_APELLIDO", type=String.class),
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_EMAIL", type=String.class),
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_PASS", type=String.class),
-                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_ENABLED", type=Long.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_ENABLED", type=Byte.class),
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_ID_UNIDAD", type=Long.class),
                         @StoredProcedureParameter(mode= ParameterMode.IN, name="P_ROL_ID", type=Long.class)
                 }

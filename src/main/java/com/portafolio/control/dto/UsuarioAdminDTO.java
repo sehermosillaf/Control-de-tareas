@@ -16,5 +16,4 @@ public class UsuarioAdminDTO {
     private Byte enabled;
     private Long unidadID;
     private Long rol_id;
-
 }

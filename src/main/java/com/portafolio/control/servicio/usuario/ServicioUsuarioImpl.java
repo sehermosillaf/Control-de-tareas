@@ -1,6 +1,7 @@
 package com.portafolio.control.servicio.usuario;
 
 import com.portafolio.control.dto.UsuarioFuncDTO;
+import com.portafolio.control.dto.UsuarioRolesDTO;
 import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.repositorio.IRolRepo;
 import com.portafolio.control.repositorio.IUsuarioRepo;
@@ -38,9 +39,13 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
-    public ResponseEntity<?> agregarUsuarioConRoles(String nombre,String apellido,String email,String pass, Byte enabled,Long unidadID,Long idRol) {
-        Usuario user = usuarioRepo.insertarUsuarioConRoles(nombre,apellido,email,pass,enabled,unidadID,idRol);
-        return ResponseEntity.ok(user);
+    public void  agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO) {
+        try{
+            String encodedPass = encoder.encode(usuarioRolesDTO.getPass());
+        usuarioRepo.insertarUsuarioConRoles(usuarioRolesDTO.getNombre(), usuarioRolesDTO.getApellido(), usuarioRolesDTO.getEmail(), encodedPass, usuarioRolesDTO.getEnabled(), usuarioRolesDTO.getIdunidad(), usuarioRolesDTO.getRolid());
+        } catch (Exception e ) {
+            System.out.println(e);
+        }
     }
 
     @Override
