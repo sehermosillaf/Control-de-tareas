@@ -17,6 +17,8 @@ public interface IServicioTarea {
 
     List<Tarea> obtenerTareasPorUsuario(Long id);
 
+    int tareasRechazadasPorUnidad(Long id);
+
     ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
     void insertarTarea(TareaDTO tareaDTO);

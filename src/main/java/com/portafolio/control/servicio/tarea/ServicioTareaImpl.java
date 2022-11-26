@@ -55,6 +55,11 @@ public class ServicioTareaImpl implements IServicioTarea {
     }
 
     @Override
+    public int tareasRechazadasPorUnidad(Long id) {
+        return tareaRepo.tareasRechazadasPorUnidad(id);
+    }
+
+    @Override
     public ResponseEntity<Tarea> guardarTarea(Tarea tarea) {
         Tarea newTask = tareaRepo.save(tarea);
         return ResponseEntity.ok(newTask);

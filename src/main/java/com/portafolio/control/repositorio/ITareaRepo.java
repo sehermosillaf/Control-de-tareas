@@ -18,6 +18,9 @@ public interface ITareaRepo extends JpaRepository<Tarea, Long> {
     @Procedure(name = "updateEstado")
     void actualizarEstado();
 
+    @Query(value = "SELECT COUNT(ID_TAREA) FROM TAREA WHERE ESTADO_ID = 5 AND ID_UNIDAD = :id",nativeQuery = true)
+            int tareasRechazadasPorUnidad(@Param("id")Long id);
+
     @Query(nativeQuery = true, value = "select * from tarea where usuario_id = ?1")
     List<Tarea> findTareasByUsuarioResponsable(Long id);
 

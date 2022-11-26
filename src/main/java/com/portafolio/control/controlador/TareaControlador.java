@@ -50,6 +50,11 @@ public class TareaControlador {
     }
 
 
+    @GetMapping("/unidad/rechazadas/{id}")
+    public int tareasRechazadasPorUnidad(@PathVariable Long id) {
+        return servicioTarea.tareasRechazadasPorUnidad(id);
+    }
+
     @PostMapping("/rechazar")
     public void rechazarTarea(@RequestBody TareaRechazadaDAO tarea) {
         servicioTarea.rechazarTarea(tarea);
