@@ -28,7 +28,6 @@ public class Unidad {
     @OneToMany(mappedBy = "unidad")
     private List<Tarea> tareas;
 
-
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;

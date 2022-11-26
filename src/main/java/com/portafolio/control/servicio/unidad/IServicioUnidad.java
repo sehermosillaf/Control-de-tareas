@@ -11,6 +11,6 @@ public interface IServicioUnidad {
 
 
     List<Unidad> obtenerUnidades();
-
+    List<Unidad> obtenerUnidadesPorEmpresa(Long id);
     ResponseEntity<Unidad> agregarUnidad(Unidad unidad);
 }

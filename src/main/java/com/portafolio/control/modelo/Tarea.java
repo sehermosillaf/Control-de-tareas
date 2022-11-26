@@ -58,7 +58,8 @@ public class Tarea implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_termino")
     private Date fechaTermino;
-
+    @Column(name = "justificacion")
+    private String justificacion;
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")

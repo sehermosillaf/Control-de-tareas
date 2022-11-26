@@ -15,8 +15,13 @@ public class UnidadControlador {
     private IServicioUnidad servicioUnidad;
 
     @GetMapping
-    public List<Unidad> obtenerUsuarios(){
+    public List<Unidad> obtenerUnidades(){
         return servicioUnidad.obtenerUnidades();
+    }
+
+    @GetMapping("/empresa/{id}")
+    public List<Unidad> obtenerUnidadesPorEmpresa(@PathVariable Long id) {
+        return servicioUnidad.obtenerUnidadesPorEmpresa(id);
     }
 
     @PostMapping

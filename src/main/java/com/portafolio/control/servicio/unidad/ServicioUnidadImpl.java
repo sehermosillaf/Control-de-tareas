@@ -19,6 +19,11 @@ public class ServicioUnidadImpl implements IServicioUnidad{
     }
 
     @Override
+    public List<Unidad> obtenerUnidadesPorEmpresa(Long id) {
+        return unidadRepo.obtenerUnidadesPorEmpresa(id);
+    }
+
+    @Override
     public ResponseEntity<Unidad> agregarUnidad(Unidad unidad) {
         Unidad nuevaUnidad = unidadRepo.save(unidad);
         return ResponseEntity.ok(nuevaUnidad);

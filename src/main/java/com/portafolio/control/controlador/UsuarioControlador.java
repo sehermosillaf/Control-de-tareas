@@ -34,6 +34,11 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerUsuarioPorID(id); //Todo:Add custom exception
     }
 
+    @GetMapping("/unit/{id}")
+    public List<Usuario> obtenerUsuariosPorUnidad(@PathVariable Long id) {
+        return servicioUsuario.obtenerUsuariosPorUnidad(id);
+    }
+
     @GetMapping("/mail/{id}")
     public String obtenerMailPorID(@PathVariable Long id){
         return servicioUsuario.buscarEmailPorID(id);

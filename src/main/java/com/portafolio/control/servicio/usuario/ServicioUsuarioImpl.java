@@ -39,6 +39,11 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
+    public List<Usuario> obtenerUsuariosPorUnidad(Long id) {
+        return usuarioRepo.findUsersByUnidad(id);
+    }
+
+    @Override
     public void  agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO) {
         try{
             String encodedPass = encoder.encode(usuarioRolesDTO.getPass());

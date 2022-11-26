@@ -24,6 +24,9 @@ public interface IUsuarioRepo extends JpaRepository<Usuario, Long> {
     List<?> findAdminUsers();
     @Query(value = "SELECT U.USUARIO_ID,U.NOMBRE || ' ' || U.APELLIDO AS NOMBRE_COMPLETO,U.EMAIL,U.PASS,R.ROL_ID FROM USUARIOS U JOIN USUARIO_ROLES R ON U.USUARIO_ID = R.USUARIO_ID WHERE R.ROL_ID = 2", nativeQuery = true)
     List<UsuarioFuncDTO> findFuncUsers();
+
+    @Query(value = "SELECT * FROM USUARIOS WHERE ID_UNIDAD = :id", nativeQuery = true)
+    List<Usuario>  findUsersByUnidad(@Param("id") Long id);
     @Procedure(name = "SP_INSERT_USER_ROLE")
     void insertarUsuarioConRoles(@Param("P_NOMBRE") String nombre,
                                  @Param("P_APELLIDO") String apellido,

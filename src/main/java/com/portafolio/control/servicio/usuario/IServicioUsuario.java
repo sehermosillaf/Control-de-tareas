@@ -13,7 +13,7 @@ public interface IServicioUsuario {
 
     Optional<Usuario> obtenerUsuarioPorID(Long id);
 
-    void agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO);
+    List<Usuario> obtenerUsuariosPorUnidad(Long id);
 
     List<?> obtenerAdmins();
 
@@ -22,6 +22,7 @@ public interface IServicioUsuario {
     String buscarEmailPorID(Long id);
 
     ResponseEntity<Usuario> agregarUsuario(Usuario usuario);
+    void agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO);
 
     ResponseEntity<Usuario> actualizarUsuario(Long id,Usuario usuario);
 

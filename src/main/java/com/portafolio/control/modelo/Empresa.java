@@ -26,7 +26,7 @@ public class Empresa implements Serializable {
     private String direccion;
     private String correo;
     private String rubro;
-
+    
     @JsonIgnore
     @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL)
     private List<Unidad> unidades;
