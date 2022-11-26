@@ -1,8 +1,10 @@
 package com.portafolio.control.servicio.tarea;
 
+import com.portafolio.control.dao.TareaRechazadaDAO;
 import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Estado;
 import com.portafolio.control.modelo.Tarea;
+import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.repositorio.IEstadoRepo;
 import com.portafolio.control.repositorio.ITareaRepo;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
@@ -61,7 +63,7 @@ public class ServicioTareaImpl implements IServicioTarea {
     @Override
     public void insertarTarea(TareaDTO tareaDTO) {
         try{
-        tareaRepo.insertarTarea(tareaDTO.getNombre(), tareaDTO.getDescripcion(), tareaDTO.getFechaCreacion(), tareaDTO.getFechaInicio(), tareaDTO.getFechaTermino(), tareaDTO.getUsuarioResponsable());
+        tareaRepo.insertarTarea(tareaDTO.getNombre(), tareaDTO.getDescripcion(), tareaDTO.getFechaCreacion(), tareaDTO.getFechaInicio(), tareaDTO.getFechaTermino(), tareaDTO.getUsuarioResponsable(),tareaDTO.getUsuarioCreador(),tareaDTO.getUnidadID());
         String correo = usuarioRepo.findEmailbyUsuarioID(tareaDTO.getUsuarioResponsable());
         System.out.println(correo);
         String asunto = "Tiene una nueva tarea asignada";
@@ -79,6 +81,16 @@ public class ServicioTareaImpl implements IServicioTarea {
         }
         tareaRepo.delete(tareaPorEliminar);
         return ResponseEntity.ok(tareaPorEliminar);
+    }
+
+    @Override
+    public void rechazarTarea(TareaRechazadaDAO tarea) {
+        tareaRepo.rechazarTarea(tarea.getIdTarea(),tarea.getJustificacion(),tarea.getIdResponsable());
+        String to = usuarioRepo.findEmailbyUsuarioID(tarea.getIdResponsable());
+        Usuario usuario = usuarioRepo.findUsuarioByEmail(to);
+        Tarea task = tareaRepo.findTareasById(tarea.getIdTarea());
+        String contenido = "La tarea '" + task.getNombre() + "' a sido rechazada por el usuario " + usuario.getNombre() + " " + usuario.getApellido();
+        email.SendEmail(to,"Tarea rechazada",contenido);
     }
 
     @Override

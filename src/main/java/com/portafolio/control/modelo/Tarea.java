@@ -34,8 +34,17 @@ import java.util.*;
                                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_INICIO", type = Date.class),
                                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_TERMINO", type = Date.class),
                                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_ID", type = Long.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_CREADOR",type = Long.class),
+                                @StoredProcedureParameter(mode=ParameterMode.IN,name = "P_UNIDAD_ID",type = Long.class)
                         }
-                )
+                ),
+                @NamedStoredProcedureQuery(name = "SP_RECHAZAR_TAREA",
+                procedureName = "SP_RECHAZAR_TAREA",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_TAREA",type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN,name = "P_JUSTIFICACION",type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN,name = "P_USUARIO_RESPONSABLE",type = Long.class)
+                })
         })
 public class Tarea implements Serializable {
     @Id
@@ -60,10 +69,15 @@ public class Tarea implements Serializable {
     private Date fechaTermino;
     @Column(name = "justificacion")
     private String justificacion;
-    @JsonIgnore
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioResponsable;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_creador_id")
+    private Usuario usuarioCreador;
 
     @ManyToOne(targetEntity = Estado.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "estado_id")

@@ -1,5 +1,6 @@
 package com.portafolio.control.servicio.tarea;
 
+import com.portafolio.control.dao.TareaRechazadaDAO;
 import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Tarea;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public interface IServicioTarea {
     void insertarTarea(TareaDTO tareaDTO);
     ResponseEntity<Tarea> eliminarTarea(Long id);
 
+    void rechazarTarea(TareaRechazadaDAO tareaRechazadaDAO);
     ResponseEntity<Tarea> actualizarTarea(Long id, Tarea tarea);
 
     void actualizarEstadoTarea();

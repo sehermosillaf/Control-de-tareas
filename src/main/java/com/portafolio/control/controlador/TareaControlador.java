@@ -1,5 +1,6 @@
 package com.portafolio.control.controlador;
 
+import com.portafolio.control.dao.TareaRechazadaDAO;
 import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Tarea;
 import com.portafolio.control.modelo.TareaSubordinada;
@@ -48,6 +49,11 @@ public class TareaControlador {
         return servicioTarea.eliminarTarea(id);
     }
 
+
+    @PostMapping("/rechazar")
+    public void rechazarTarea(@RequestBody TareaRechazadaDAO tarea) {
+        servicioTarea.rechazarTarea(tarea);
+    }
 
     @PutMapping("/{id}")
     @ResponseBody

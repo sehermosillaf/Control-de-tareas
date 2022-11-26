@@ -10,17 +10,22 @@ public class TareaDTO {
     private Date fechaInicio;
     private Date fechaTermino;
     private Long usuarioResponsable;
+    private Long usuarioCreador;
+
+    private Long unidadID;
 
     public TareaDTO() {
     }
 
-    public TareaDTO(String nombre, String descripcion, Date fechaCreacion, Date fechaInicio, Date fechaTermino, Long usuarioResponsable) {
+    public TareaDTO(String nombre, String descripcion, Date fechaCreacion, Date fechaInicio, Date fechaTermino, Long usuarioResponsable, Long usuarioCreador, Long unidadID) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaCreacion = fechaCreacion;
         this.fechaInicio = fechaInicio;
         this.fechaTermino = fechaTermino;
         this.usuarioResponsable = usuarioResponsable;
+        this.usuarioCreador = usuarioCreador;
+        this.unidadID = unidadID;
     }
 
     public String getNombre() {
@@ -69,5 +74,21 @@ public class TareaDTO {
 
     public void setUsuarioResponsable(Long usuarioResponsable) {
         this.usuarioResponsable = usuarioResponsable;
+    }
+
+    public Long getUsuarioCreador() {
+        return usuarioCreador;
+    }
+
+    public void setUsuarioCreador(Long usuarioCreador) {
+        this.usuarioCreador = usuarioCreador;
+    }
+
+    public Long getUnidadID() {
+        return unidadID;
+    }
+
+    public void setUnidadID(Long unidadID) {
+        this.unidadID = unidadID;
     }
 }
