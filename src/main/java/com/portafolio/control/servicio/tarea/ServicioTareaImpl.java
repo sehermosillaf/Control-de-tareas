@@ -94,7 +94,7 @@ public class ServicioTareaImpl implements IServicioTarea {
         String to = usuarioRepo.findEmailbyUsuarioID(tarea.getIdResponsable());
         Usuario usuario = usuarioRepo.findUsuarioByEmail(to);
         Tarea task = tareaRepo.findTareasById(tarea.getIdTarea());
-        String contenido = "La tarea '" + task.getNombre() + "' a sido rechazada por el usuario " + usuario.getNombre() + " " + usuario.getApellido();
+        String contenido = "La tarea '" + task.getNombre() + "' a sido rechazada por el usuario " + usuario.getNombre() + " " + usuario.getApellido() + "\nJustificación: " + tarea.getJustificacion();
         email.SendEmail(to,"Tarea rechazada",contenido);
     }
 
@@ -115,6 +115,11 @@ public class ServicioTareaImpl implements IServicioTarea {
     @Override
     public void actualizarEstadoTarea() {
         tareaRepo.actualizarEstado();
+    }
+
+    @Override
+    public int obtenerUsuarioCreador(Long idTarea) {
+        return tareaRepo.obtenerUsuarioCreador(idTarea);
     }
 
 

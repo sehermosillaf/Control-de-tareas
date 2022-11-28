@@ -1,9 +1,11 @@
 package com.portafolio.control.controlador;
 
+import com.portafolio.control.dao.Subtarea;
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.servicio.subtarea.IServicioSubtarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,10 @@ public class SubtareaControlador {
     public Optional<TareaSubordinada> obtenerTareasSubordinadas(@PathVariable Long id) {
         return servicioSubtarea.obtenerSubtareaPorID(id);
     }
+    @GetMapping("/tarea/{id}")
+    public List<Subtarea> obtenerSubtareasPorTareaID(@PathVariable Long id){
+        return servicioSubtarea.obtenerSubtareasPorTareaID(id);
+    }
     @PostMapping
     @ResponseBody
     public void agregarSubTarea(@RequestBody TareaSubordinada subtarea) {
@@ -39,6 +45,7 @@ public class SubtareaControlador {
     public ResponseEntity<TareaSubordinada> eliminarTareaPorID(@PathVariable Long id) {
         return servicioSubtarea.eliminarSubtarea(id);
     }
+
 
 
 

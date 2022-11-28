@@ -32,4 +32,7 @@ public interface ITareaRepo extends JpaRepository<Tarea, Long> {
 
     @Procedure(name = "SP_RECHAZAR_TAREA")
     void rechazarTarea(@Param("P_ID_TAREA") Long idTarea, @Param("P_JUSTIFICACION") String justificacion, @Param("P_USUARIO_RESPONSABLE") Long idResponsable);
+
+    @Query(nativeQuery = true,value ="SELECT usuario_creador_id from tarea where id_tarea = :idTarea")
+    int obtenerUsuarioCreador(@Param("idTarea") Long id);
 }

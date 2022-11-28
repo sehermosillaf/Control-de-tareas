@@ -1,5 +1,6 @@
 package com.portafolio.control.servicio.subtarea;
 
+import com.portafolio.control.dao.Subtarea;
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +40,26 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
     }
 
     @Override
+    public List<Subtarea> obtenerSubtareasPorTareaID(Long id) {
+        return subtareaRepo.obtenerSubtareasPorTareaID(id);
+    }
+
+    @Override
     public ResponseEntity<TareaSubordinada> guardarSinAsignarSubtarea(TareaSubordinada subtarea) {
         TareaSubordinada nuevaSubtrea = subtareaRepo.save(subtarea);
         return new ResponseEntity<>(nuevaSubtrea,CREATED);
     }
 
 //    @Override
-//    public ResponseEntity<TareaSubordinada> guardarYAsignar(TareaSubordinada subtarea,Long id) {
+//    public ResponseEntity<TareaSubordinada> guardarYAsignar(TareaSubordinada Subtarea,Long id) {
 //        TareaSubordinada nuevaSubTarea = new TareaSubordinada();
-//        nuevaSubTarea.setId(subtarea.getId());
-//        nuevaSubTarea.setNombre(subtarea.getNombre());
-//        nuevaSubTarea.setDescripcion(subtarea.getDescripcion());
-//        nuevaSubTarea.setFechaCreacion(subtarea.getFechaCreacion());
-//        nuevaSubTarea.setFechaInicio(subtarea.getFechaInicio());
-//        nuevaSubTarea.setFechaTermino(subtarea.getFechaTermino());
-//        nuevaSubTarea.setTarea(subtarea.getTarea().);
+//        nuevaSubTarea.setId(Subtarea.getId());
+//        nuevaSubTarea.setNombre(Subtarea.getNombre());
+//        nuevaSubTarea.setDescripcion(Subtarea.getDescripcion());
+//        nuevaSubTarea.setFechaCreacion(Subtarea.getFechaCreacion());
+//        nuevaSubTarea.setFechaInicio(Subtarea.getFechaInicio());
+//        nuevaSubTarea.setFechaTermino(Subtarea.getFechaTermino());
+//        nuevaSubTarea.setTarea(Subtarea.getTarea().);
 //        return null;
 //    }
 
@@ -66,6 +72,8 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
         subtareaRepo.deleteById(id);
         return ResponseEntity.ok(subtareaPorEliminar);
     }
+
+
 
 
 

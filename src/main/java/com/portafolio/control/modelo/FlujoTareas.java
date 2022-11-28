@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "proceso")
@@ -21,9 +23,9 @@ public class FlujoTareas implements Serializable {
     private String nombre;
     private String descripcion;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "tareas")
-    private Tarea tareas;
+    private Set<Tarea> tareas;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")

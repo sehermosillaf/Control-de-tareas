@@ -39,8 +39,6 @@ public class TareaSubordinada implements Serializable {
     @Column(name = "fecha_termino")
     private Date fechaTermino;
 
-
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "id_tarea")
     private Tarea tarea;

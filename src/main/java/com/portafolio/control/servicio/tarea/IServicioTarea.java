@@ -29,4 +29,5 @@ public interface IServicioTarea {
 
     void actualizarEstadoTarea();
 
+    int obtenerUsuarioCreador(Long idTarea);
 }

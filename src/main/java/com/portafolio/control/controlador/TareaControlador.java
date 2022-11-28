@@ -65,8 +65,13 @@ public class TareaControlador {
     public ResponseEntity<Tarea> actualizarTarea(@PathVariable Long id,@RequestBody Tarea tarea) {
         return servicioTarea.actualizarTarea(id,tarea);
     }
-    @PutMapping("/estado")
+    @GetMapping("/estado")
     public void actualizarEstado() {
         servicioTarea.actualizarEstadoTarea();
+    }
+
+    @GetMapping("/creador/{idTarea}")
+    public int obtenerUsuarioCreador(@PathVariable Long idTarea){
+        return servicioTarea.obtenerUsuarioCreador(idTarea);
     }
 }
