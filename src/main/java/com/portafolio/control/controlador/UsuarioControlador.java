@@ -1,13 +1,10 @@
 package com.portafolio.control.controlador;
 
-import com.portafolio.control.dto.UsuarioAdminDTO;
 import com.portafolio.control.dto.UsuarioFuncDTO;
 import com.portafolio.control.dto.UsuarioRolesDTO;
 import com.portafolio.control.modelo.Usuario;
-import com.portafolio.control.servicio.estado.IServicioEstado;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
 import com.portafolio.control.servicio.usuario.IServicioUsuario;
-import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

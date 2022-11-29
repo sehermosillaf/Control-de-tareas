@@ -1,6 +1,7 @@
 package com.portafolio.control.servicio.subtarea;
 
 import com.portafolio.control.dao.Subtarea;
+import com.portafolio.control.dto.SubtareaDTO;
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
     }
 
     @Override
+    public void insertarSubtarea(SubtareaDTO subtareaDTO) {
+         subtareaRepo.insertarSubtarea(subtareaDTO.getNombre(),subtareaDTO.getDescripcion(),subtareaDTO.getFechaCreacion(),subtareaDTO.getFechaInicio(),subtareaDTO.getFechaTermino(),subtareaDTO.getIdTarea());
+    }
+
+    @Override
     public ResponseEntity<TareaSubordinada> guardarSinAsignarSubtarea(TareaSubordinada subtarea) {
         TareaSubordinada nuevaSubtrea = subtareaRepo.save(subtarea);
         return new ResponseEntity<>(nuevaSubtrea,CREATED);
@@ -72,6 +78,7 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
         subtareaRepo.deleteById(id);
         return ResponseEntity.ok(subtareaPorEliminar);
     }
+
 
 
 

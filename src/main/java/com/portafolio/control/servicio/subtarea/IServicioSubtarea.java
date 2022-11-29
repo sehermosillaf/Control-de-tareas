@@ -1,6 +1,7 @@
 package com.portafolio.control.servicio.subtarea;
 
 import com.portafolio.control.dao.Subtarea;
+import com.portafolio.control.dto.SubtareaDTO;
 import com.portafolio.control.modelo.TareaSubordinada;
 import org.springframework.http.ResponseEntity;
 
@@ -22,4 +23,6 @@ public interface IServicioSubtarea {
     ResponseEntity<TareaSubordinada> actualizarSubtarea(Long id,TareaSubordinada subtarea);
 
     List<Subtarea> obtenerSubtareasPorTareaID(Long id);
+
+    void insertarSubtarea(SubtareaDTO subtareaDTO);
 }

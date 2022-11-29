@@ -1,19 +1,13 @@
 package com.portafolio.control.repositorio;
 
-import com.portafolio.control.dto.UsuarioAdminDTO;
 import com.portafolio.control.dto.UsuarioFuncDTO;
-import com.portafolio.control.dto.UsuarioRolesDTO;
-import com.portafolio.control.modelo.Rol;
 import com.portafolio.control.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Repository

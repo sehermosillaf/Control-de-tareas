@@ -83,6 +83,7 @@ public class Tarea implements Serializable {
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
+
     @OneToMany(mappedBy = "tarea", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 

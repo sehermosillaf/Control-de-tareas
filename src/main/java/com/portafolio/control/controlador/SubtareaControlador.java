@@ -1,9 +1,11 @@
 package com.portafolio.control.controlador;
 
 import com.portafolio.control.dao.Subtarea;
+import com.portafolio.control.dto.SubtareaDTO;
 import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.servicio.subtarea.IServicioSubtarea;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,12 @@ public class SubtareaControlador {
     @ResponseBody
     public void agregarSubTarea(@RequestBody TareaSubordinada subtarea) {
         servicioSubtarea.guardarSinAsignarSubtarea(subtarea);
+    }
+
+    @PostMapping("/insert")
+    @ResponseBody
+    public void insertarSubtarea(@RequestBody SubtareaDTO subtareaDTO) {
+        servicioSubtarea.insertarSubtarea(subtareaDTO);
     }
 
     @PutMapping("/{id}")

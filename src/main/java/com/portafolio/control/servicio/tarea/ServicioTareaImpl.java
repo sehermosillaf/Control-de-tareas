@@ -2,10 +2,8 @@ package com.portafolio.control.servicio.tarea;
 
 import com.portafolio.control.dao.TareaRechazadaDAO;
 import com.portafolio.control.dto.TareaDTO;
-import com.portafolio.control.modelo.Estado;
 import com.portafolio.control.modelo.Tarea;
 import com.portafolio.control.modelo.Usuario;
-import com.portafolio.control.repositorio.IEstadoRepo;
 import com.portafolio.control.repositorio.ITareaRepo;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
 import com.portafolio.control.repositorio.IUsuarioRepo;
@@ -15,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,10 +113,13 @@ public class ServicioTareaImpl implements IServicioTarea {
         tareaRepo.actualizarEstado();
     }
 
+
     @Override
     public int obtenerUsuarioCreador(Long idTarea) {
         return tareaRepo.obtenerUsuarioCreador(idTarea);
     }
+
+
 
 
 }

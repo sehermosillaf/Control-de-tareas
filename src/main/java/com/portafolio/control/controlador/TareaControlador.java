@@ -3,13 +3,11 @@ package com.portafolio.control.controlador;
 import com.portafolio.control.dao.TareaRechazadaDAO;
 import com.portafolio.control.dto.TareaDTO;
 import com.portafolio.control.modelo.Tarea;
-import com.portafolio.control.modelo.TareaSubordinada;
 import com.portafolio.control.servicio.tarea.IServicioTarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

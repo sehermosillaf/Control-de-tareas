@@ -15,6 +15,21 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedStoredProcedureQueries(
+        {
+                @NamedStoredProcedureQuery(
+                        name = "SP_INSERTAR_SUBTAREA",
+                        procedureName = "SP_INSERTAR_SUBTAREA",
+                        parameters = {
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_DESCRIPCION", type = String.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_CREACION", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_INICIO", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_TERMINO", type = Date.class),
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_TAREA", type = Long.class)
+                        })
+        }
+)
 public class TareaSubordinada implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

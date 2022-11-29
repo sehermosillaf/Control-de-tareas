@@ -1,5 +1,6 @@
 package com.portafolio.control.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class FlujoTareas implements Serializable {
     private String nombre;
     private String descripcion;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "tareas")
     private Set<Tarea> tareas;
@@ -30,7 +32,6 @@ public class FlujoTareas implements Serializable {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-
     @ManyToOne
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;
