@@ -35,4 +35,7 @@ public interface ITareaRepo extends JpaRepository<Tarea, Long> {
 
     @Query(nativeQuery = true,value ="SELECT usuario_creador_id from tarea where id_tarea = :idTarea")
     int obtenerUsuarioCreador(@Param("idTarea") Long id);
+
+    @Query(nativeQuery = true,value = "SELECT email from tarea where id_tarea = :idTarea")
+    String obtenerEmailPorTareaID(@Param("idTarea")Long id);
 }

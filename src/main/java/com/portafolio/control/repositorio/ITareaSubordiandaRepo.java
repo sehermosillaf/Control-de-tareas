@@ -22,5 +22,4 @@ public interface ITareaSubordiandaRepo extends JpaRepository<TareaSubordinada, L
                        @Param("P_FECHA_CREACION") Date fechaCreacion, @Param("P_FECHA_INICIO") Date fechaInicio,
                        @Param("P_FECHA_TERMINO") Date fechaTermino, @Param("P_ID_TAREA") Long idTarea);
 
-
 }

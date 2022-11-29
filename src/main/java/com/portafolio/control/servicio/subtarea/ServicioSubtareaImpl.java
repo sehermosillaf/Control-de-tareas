@@ -3,7 +3,9 @@ package com.portafolio.control.servicio.subtarea;
 import com.portafolio.control.dao.Subtarea;
 import com.portafolio.control.dto.SubtareaDTO;
 import com.portafolio.control.modelo.TareaSubordinada;
+import com.portafolio.control.repositorio.ITareaRepo;
 import com.portafolio.control.repositorio.ITareaSubordiandaRepo;
+import com.portafolio.control.servicio.mail.EnvioMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,11 @@ public class ServicioSubtareaImpl implements IServicioSubtarea{
 
     @Autowired
     private ITareaSubordiandaRepo subtareaRepo;
+    @Autowired
+    private EnvioMail email;
+
+    @Autowired
+    private ITareaRepo tareaRepo;
     @Override
     public List<TareaSubordinada> obtenerSubtareas() {
         return subtareaRepo.findAll();
