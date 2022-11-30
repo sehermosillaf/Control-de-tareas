@@ -66,9 +66,13 @@ public class ServicioTareaImpl implements IServicioTarea {
         try{
         tareaRepo.insertarTarea(tareaDTO.getNombre(), tareaDTO.getDescripcion(), tareaDTO.getFechaCreacion(), tareaDTO.getFechaInicio(), tareaDTO.getFechaTermino(), tareaDTO.getUsuarioResponsable(),tareaDTO.getUsuarioCreador(),tareaDTO.getUnidadID());
         String correo = usuarioRepo.findEmailbyUsuarioID(tareaDTO.getUsuarioResponsable());
+        Usuario usuario =usuarioRepo.findUsuarioByEmail(correo);
         System.out.println(correo);
         String asunto = "Tiene una nueva tarea asignada";
-        String contenido = "Tarea con nombre " + tareaDTO.getNombre() + " con plazo de inicio " + tareaDTO.getFechaInicio() + " y fecha de termino limite " + tareaDTO.getFechaTermino() + " ";
+        String contenido =
+                "Estimado, " + usuario.getNombre() +" " + usuario.getApellido() + "\n" +
+                "Le han asignado una tarea con nombre '" + tareaDTO.getNombre() +"' con un plazo de inicio el dia " + tareaDTO.getFechaInicio() + " y fecha de termino limite " + tareaDTO.getFechaTermino() + "\n" +
+                "Control de tareas - Process SPA";
         email.SendEmail(correo,asunto,contenido);
         } catch(Exception e) {
         }

@@ -26,13 +26,14 @@ public class FlujoTareas implements Serializable {
 
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "tareas")
+    @JoinColumn(name = "tarea_id")
     private Set<Tarea> tareas;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+
     @ManyToOne
     @JoinColumn(name = "equipo_id")
-    private Equipo equipo;
+    private Unidad unidad;
 }
