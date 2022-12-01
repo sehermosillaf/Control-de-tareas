@@ -31,14 +31,13 @@ public class TareasPDF {
 
     public void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(Color.BLUE);
+        cell.setBackgroundColor(Color.GRAY);
         cell.setPadding(5);
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
         cell.setPhrase(new Phrase("Numero de Tarea", font));
-
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Nombre", font));
