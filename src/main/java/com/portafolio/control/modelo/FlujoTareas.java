@@ -30,10 +30,7 @@ public class FlujoTareas implements Serializable {
     private Set<Tarea> tareas;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
-
-    @ManyToOne
-    @JoinColumn(name = "equipo_id")
+    @JoinColumn(name = "unidad_id")
     private Unidad unidad;
+
 }

@@ -24,6 +24,5 @@ public class Equipo implements Serializable {
     private String nombre;
     private String descripcion;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<FlujoTareas> flujos;
+
 }
