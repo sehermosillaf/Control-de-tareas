@@ -87,10 +87,6 @@ public class Tarea implements Serializable {
     @OneToMany(mappedBy = "tarea", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TareaSubordinada> subtareas;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "tarjeta")
-    private Tarjeta tarjeta;
 
     @JsonIgnore
     @ManyToOne

@@ -26,6 +26,4 @@ public class Tarjeta implements Serializable {
     private String descripcion;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Progeso progeso;
-    @OneToMany(mappedBy = "tarjeta")
-    private List<Tarea> tareas;
 }
