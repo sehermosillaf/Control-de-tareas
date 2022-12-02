@@ -1,9 +1,7 @@
 package com.portafolio.control.servicio.flujos;
 
+import com.portafolio.control.dto.FlujoDTO;
 import com.portafolio.control.modelo.FlujoTareas;
-import com.portafolio.control.modelo.Usuario;
-import com.portafolio.control.repositorio.IFlujoRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -19,4 +17,6 @@ public interface IServicioFlujo {
     ResponseEntity<FlujoTareas> actualizarFlujo(Long id,FlujoTareas flujo);
 
     ResponseEntity<FlujoTareas> eliminarFlujo(Long id);
+
+    void insertarFlujo  (FlujoDTO flujoDTO);
 }

@@ -1,8 +1,5 @@
 package com.portafolio.control.dto;
 
-import com.portafolio.control.modelo.Tarea;
-import lombok.Data;
-
 import java.util.Date;
 
 public class TareaEstadoDTO {

@@ -1,7 +1,7 @@
 package com.portafolio.control.servicio.flujos;
 
+import com.portafolio.control.dto.FlujoDTO;
 import com.portafolio.control.modelo.FlujoTareas;
-import com.portafolio.control.modelo.Usuario;
 import com.portafolio.control.repositorio.IFlujoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +40,15 @@ public class ServicioFlujoImpl implements IServicioFlujo{
     @Override
     public ResponseEntity<FlujoTareas> eliminarFlujo(Long id) {
         return null;
+    }
+
+    @Override
+    public void insertarFlujo(FlujoDTO flujoDTO) {
+        try{
+        flujoRepo.insertarFlujoPlsql(flujoDTO.getNombre(),flujoDTO.getDescripcion(), flujoDTO.getTareaid(), flujoDTO.getUnidadid());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

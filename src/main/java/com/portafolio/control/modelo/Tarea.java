@@ -14,7 +14,6 @@ import java.util.*;
 
 @Entity
 @Table(name = "tarea")
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -105,5 +104,23 @@ public class Tarea implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getNombre(), getDescripcion(), getFechaCreacion(), getFechaInicio(), getFechaTermino(), getUsuarioResponsable(), getSubtareas());
+    }
+
+    @Override
+    public String toString() {
+        return "Tarea{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaTermino=" + fechaTermino +
+                ", justificacion='" + justificacion + '\'' +
+                ", usuarioResponsable=" + usuarioResponsable +
+                ", usuarioCreador=" + usuarioCreador +
+                ", estado=" + estado +
+                ", subtareas=" + subtareas +
+                ", unidad=" + unidad +
+                '}';
     }
 }

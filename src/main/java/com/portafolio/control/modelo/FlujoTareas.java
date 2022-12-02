@@ -17,6 +17,18 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "SP_INSERTAR_FLUJO",
+                procedureName = "SP_INSERTAR_FLUJO",
+                parameters = {
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_NOMBRE", type=String.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_DESCRIPCION", type=String.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_TAREA_ID", type=Long.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_UNIDAD_ID", type=Long.class)
+                }
+        )
+})
 public class FlujoTareas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +45,18 @@ public class FlujoTareas implements Serializable {
     @JoinColumn(name = "unidad_id")
     private Unidad unidad;
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

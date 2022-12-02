@@ -37,7 +37,7 @@ public class TareasPDF {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
-        cell.setPhrase(new Phrase("Numero de Tarea", font));
+        cell.setPhrase(new Phrase("n.º", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Nombre", font));
@@ -46,13 +46,9 @@ public class TareasPDF {
         cell.setPhrase(new Phrase("Descripcion", font));
         table.addCell(cell);
 
-        cell.setPhrase(new Phrase("Fecha de Creacion", font));
+        cell.setPhrase(new Phrase("F.Inicio", font));
         table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Fecha de Inicio", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Fecha de Termino", font));
+        cell.setPhrase(new Phrase("F.Termino", font));
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Asignado", font));
@@ -73,19 +69,17 @@ public class TareasPDF {
             table.addCell(String.valueOf(tarea.getId()));
             table.addCell(tarea.getNombre());
             table.addCell(tarea.getDescripcion());
-            table.addCell(tarea.getFechaCreacion().toString());
-            table.addCell(tarea.getFechaInicio().toString());
-            table.addCell(tarea.getFechaTermino().toString());
+            table.addCell(tarea.getFechaInicio().toString().substring(0,9));
+            table.addCell(tarea.getFechaTermino().toString().substring(0,9));
             table.addCell(tarea.getUsuarioResponsable().getNombre());
-            table.addCell(tarea.getUsuarioCreador().toString());
-            table.addCell(tarea.getUnidad().toString());
+            table.addCell(tarea.getUsuarioCreador().getNombre());
+            table.addCell(tarea.getUnidad().getNombre().toString());
             table.addCell(tarea.getEstado().getNombre());
         }
     }
     public void export(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
-
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
@@ -93,14 +87,11 @@ public class TareasPDF {
 
         Paragraph p = new Paragraph("Lista de tareas", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
-
         document.add(p);
-
-        PdfPTable table = new PdfPTable(5);
+        PdfPTable table = new PdfPTable(9);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f, 1.5f});
+        table.setWidths(new float[] {1f, 2f, 3.0f, 3f,3f, 2f, 2f, 3.0f, 2.5f});
         table.setSpacingBefore(10);
-
         writeTableHeader(table);
         writeTableData(table);
 
