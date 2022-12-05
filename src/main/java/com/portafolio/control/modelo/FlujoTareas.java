@@ -36,10 +36,8 @@ public class FlujoTareas implements Serializable {
     private String nombre;
     private String descripcion;
 
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "tarea_id")
-    private Set<Tarea> tareas;
+    @OneToMany(mappedBy = "flujos")
+    private List<Tarea> tareas;
 
     @ManyToOne
     @JoinColumn(name = "unidad_id")
