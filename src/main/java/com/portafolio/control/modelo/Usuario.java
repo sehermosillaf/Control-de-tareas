@@ -1,7 +1,6 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.*;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

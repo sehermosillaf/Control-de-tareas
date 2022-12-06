@@ -66,10 +66,19 @@ public class TareaControlador {
     public int tareasAlertaPorUnidad(@PathVariable Long id) {
         return servicioTarea.tareasAlertasPorUnidad(id);
     }
+    @GetMapping("/unidad/terminadas/{id}")
+    public int tareasTerminadasPorUnidad(@PathVariable Long id) {
+        return servicioTarea.tareasTerminadasPorUnidad(id);
+    }
 
     @PostMapping("/rechazar")
     public void rechazarTarea(@RequestBody TareaRechazadaDAO tarea) {
         servicioTarea.rechazarTarea(tarea);
+    }
+
+    @PostMapping("/terminar/{id}")
+    public void terminarTarea(@PathVariable Long id) {
+         servicioTarea.terminarTarea(id);
     }
 
     @PutMapping("/{id}")

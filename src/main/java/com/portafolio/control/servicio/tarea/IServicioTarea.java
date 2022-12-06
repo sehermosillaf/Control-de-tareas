@@ -21,6 +21,8 @@ public interface IServicioTarea {
 
     int tareasAtrasadasPorUnidad(Long id);
 
+    int tareasTerminadasPorUnidad(Long id);
+
     int tareasAlertasPorUnidad(Long id);
     int tareasBuenasPorUnidad(Long id);
 
@@ -32,6 +34,7 @@ public interface IServicioTarea {
     void rechazarTarea(TareaRechazadaDAO tareaRechazadaDAO);
     ResponseEntity<Tarea> actualizarTarea(Long id, Tarea tarea);
 
+    void terminarTarea(Long id);
     void actualizarEstadoTarea();
 
     int obtenerUsuarioCreador(Long idTarea);

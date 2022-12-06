@@ -1,7 +1,6 @@
 package com.portafolio.control.modelo;
 
 import com.fasterxml.jackson.annotation.*;
-import com.voodoodyne.jackson.jsog.JSOGGenerator;
 import lombok.*;
 import oracle.sql.DATE;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,7 +42,13 @@ import java.util.*;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_TAREA",type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN,name = "P_JUSTIFICACION",type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.IN,name = "P_USUARIO_RESPONSABLE",type = Long.class)
+                }),
+                @NamedStoredProcedureQuery(name = "SP_TERMINAR_TAREA",
+                procedureName = "SP_TERMINAR_TAREA",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_TAREA",type = Long.class)
                 })
+
         })
 public class Tarea implements Serializable {
     @Id

@@ -55,6 +55,11 @@ public class ServicioTareaImpl implements IServicioTarea {
     }
 
     @Override
+    public int tareasTerminadasPorUnidad(Long id) {
+        return tareaRepo.tareasTerminadasPorUnidad(id);
+    }
+
+    @Override
     public int tareasAlertasPorUnidad(Long id) {
         return tareaRepo.tareasAlertasPorUnidad(id);
     }
@@ -123,17 +128,18 @@ public class ServicioTareaImpl implements IServicioTarea {
     }
 
     @Override
+    public void terminarTarea(Long id) {
+        tareaRepo.terminarTarea(id);
+    }
+
+    @Override
     public void actualizarEstadoTarea() {
         tareaRepo.actualizarEstado();
     }
-
 
     @Override
     public int obtenerUsuarioCreador(Long idTarea) {
         return tareaRepo.obtenerUsuarioCreador(idTarea);
     }
-
-
-
 
 }
