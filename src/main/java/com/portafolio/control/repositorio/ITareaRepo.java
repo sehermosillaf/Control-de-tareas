@@ -20,6 +20,14 @@ public interface ITareaRepo extends JpaRepository<Tarea, Long> {
 
     @Query(value = "SELECT COUNT(ID_TAREA) FROM TAREA WHERE ESTADO_ID = 5 AND ID_UNIDAD = :id",nativeQuery = true)
             int tareasRechazadasPorUnidad(@Param("id")Long id);
+    @Query(value = "SELECT COUNT(ID_TAREA) FROM TAREA WHERE ESTADO_ID = 2 AND ID_UNIDAD = :id",nativeQuery = true)
+    int tareasAlertasPorUnidad(@Param("id")Long id);
+
+    @Query(value = "SELECT COUNT(ID_TAREA) FROM TAREA WHERE ESTADO_ID = 3 AND ID_UNIDAD = :id",nativeQuery = true)
+    int tareasAtrasadasPorUnidad(@Param("id")Long id);
+
+    @Query(value = "SELECT COUNT(ID_TAREA) FROM TAREA WHERE ESTADO_ID = 1 AND ID_UNIDAD = :id",nativeQuery = true)
+    int tareasBuenasPorUnidad(@Param("id")Long id);
 
     @Query(nativeQuery = true, value = "select * from tarea where usuario_id = ?1")
     List<Tarea> findTareasByUsuarioResponsable(Long id);
@@ -38,4 +46,5 @@ public interface ITareaRepo extends JpaRepository<Tarea, Long> {
 
     @Query(nativeQuery = true,value = "SELECT email from tarea where id_tarea = :idTarea")
     String obtenerEmailPorTareaID(@Param("idTarea")Long id);
+
 }

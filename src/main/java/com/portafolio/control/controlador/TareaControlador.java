@@ -52,6 +52,20 @@ public class TareaControlador {
     public int tareasRechazadasPorUnidad(@PathVariable Long id) {
         return servicioTarea.tareasRechazadasPorUnidad(id);
     }
+    @GetMapping("/unidad/atrasadas/{id}")
+    public int tareasAtrasadasPorUnidad(@PathVariable Long id) {
+        return servicioTarea.tareasAtrasadasPorUnidad(id);
+    }
+
+    @GetMapping("/unidad/enplazo/{id}")
+    public int tareasEnPlazoPorUnidad(@PathVariable Long id) {
+        return servicioTarea.tareasBuenasPorUnidad(id);
+    }
+
+    @GetMapping("/unidad/alerta/{id}")
+    public int tareasAlertaPorUnidad(@PathVariable Long id) {
+        return servicioTarea.tareasAlertasPorUnidad(id);
+    }
 
     @PostMapping("/rechazar")
     public void rechazarTarea(@RequestBody TareaRechazadaDAO tarea) {

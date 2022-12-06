@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/usuarios")
 public class UsuarioControlador {
     @Autowired
     private IServicioUsuario servicioUsuario;
@@ -34,6 +34,11 @@ public class UsuarioControlador {
     @GetMapping("/unit/{id}")
     public List<Usuario> obtenerUsuariosPorUnidad(@PathVariable Long id) {
         return servicioUsuario.obtenerUsuariosPorUnidad(id);
+    }
+
+    @GetMapping("/unit/{id}/func")
+    public List<Usuario> obtenerFuncionariosPorUnidad(@PathVariable Long id) {
+        return servicioUsuario.obtenerFuncionariosPorUnidad(id);
     }
 
     @GetMapping("/mail/{id}")

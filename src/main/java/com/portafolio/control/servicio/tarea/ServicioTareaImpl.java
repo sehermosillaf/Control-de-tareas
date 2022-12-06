@@ -27,12 +27,6 @@ public class ServicioTareaImpl implements IServicioTarea {
     private IUsuarioRepo usuarioRepo;
 
     @Autowired
-    private ServicioEstadoImpl servicioEstado;
-
-    @Autowired
-    private ITareaSubordiandaRepo tareaSubordiandaRepo;
-
-    @Autowired
     private EnvioMail email;
 
     @Override
@@ -53,6 +47,21 @@ public class ServicioTareaImpl implements IServicioTarea {
     @Override
     public int tareasRechazadasPorUnidad(Long id) {
         return tareaRepo.tareasRechazadasPorUnidad(id);
+    }
+
+    @Override
+    public int tareasAtrasadasPorUnidad(Long id) {
+        return tareaRepo.tareasAtrasadasPorUnidad(id);
+    }
+
+    @Override
+    public int tareasAlertasPorUnidad(Long id) {
+        return tareaRepo.tareasAlertasPorUnidad(id);
+    }
+
+    @Override
+    public int tareasBuenasPorUnidad(Long id) {
+        return tareaRepo.tareasBuenasPorUnidad(id);
     }
 
     @Override
@@ -89,13 +98,14 @@ public class ServicioTareaImpl implements IServicioTarea {
     }
 
     @Override
+    //Todo: Verificar usuario responsable email
     public void rechazarTarea(TareaRechazadaDAO tarea) {
         tareaRepo.rechazarTarea(tarea.getIdTarea(),tarea.getJustificacion(),tarea.getIdResponsable());
-        String to = usuarioRepo.findEmailbyUsuarioID(tarea.getIdResponsable());
-        Usuario usuario = usuarioRepo.findUsuarioByEmail(to);
+        String correo = usuarioRepo.findEmailbyUsuarioID(tarea.getIdResponsable());
+        Usuario usuario = usuarioRepo.findUsuarioByEmail(correo);
         Tarea task = tareaRepo.findTareasById(tarea.getIdTarea());
         String contenido = "La tarea '" + task.getNombre() + "' a sido rechazada por el usuario " + usuario.getNombre() + " " + usuario.getApellido() + "\nJustificación: " + tarea.getJustificacion();
-        email.SendEmail(to,"Tarea rechazada",contenido);
+        email.SendEmail(correo,"Tarea rechazada",contenido);
     }
 
     @Override

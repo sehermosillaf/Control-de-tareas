@@ -19,6 +19,11 @@ public interface IServicioTarea {
 
     int tareasRechazadasPorUnidad(Long id);
 
+    int tareasAtrasadasPorUnidad(Long id);
+
+    int tareasAlertasPorUnidad(Long id);
+    int tareasBuenasPorUnidad(Long id);
+
     ResponseEntity<Tarea> guardarTarea(Tarea tarea);
 
     void insertarTarea(TareaDTO tareaDTO);
