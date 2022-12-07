@@ -49,6 +49,11 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
+    public List<Usuario> obtenerFuncionariosPorEmpresa(Long id) {
+        return usuarioRepo.obtenerFuncionariosPorEmpresa(id);
+    }
+
+    @Override
     public void  agregarUsuarioConRoles(UsuarioRolesDTO usuarioRolesDTO) {
         try{
             String encodedPass = encoder.encode(usuarioRolesDTO.getPass());

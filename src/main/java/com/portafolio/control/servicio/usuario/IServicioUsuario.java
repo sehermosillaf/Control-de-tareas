@@ -17,6 +17,8 @@ public interface IServicioUsuario {
 
     List<Usuario> obtenerFuncionariosPorUnidad(Long id);
 
+    List<Usuario> obtenerFuncionariosPorEmpresa(Long id);
+
     List<?> obtenerAdmins();
 
     List<UsuarioFuncDTO> obtenerFunc();

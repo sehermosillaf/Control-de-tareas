@@ -41,6 +41,11 @@ public class UsuarioControlador {
         return servicioUsuario.obtenerFuncionariosPorUnidad(id);
     }
 
+    @GetMapping("/empresa/{id}/func")
+    public List<Usuario> obtenerFuncionariosPorEmpresa(@PathVariable Long id) {
+        return servicioUsuario.obtenerFuncionariosPorEmpresa(id);
+    }
+
     @GetMapping("/mail/{id}")
     public String obtenerMailPorID(@PathVariable Long id){
         return servicioUsuario.buscarEmailPorID(id);
