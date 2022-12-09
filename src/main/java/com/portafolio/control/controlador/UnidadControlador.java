@@ -1,5 +1,6 @@
 package com.portafolio.control.controlador;
 
+import com.portafolio.control.dto.UnidadDTO;
 import com.portafolio.control.modelo.Unidad;
 import com.portafolio.control.servicio.unidad.IServicioUnidad;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class UnidadControlador {
         return servicioUnidad.obtenerUnidadesPorEmpresa(id);
     }
 
+    @PostMapping("/insertar")
+    public void insertarUnidad(@RequestBody UnidadDTO unidadDTO) {
+         servicioUnidad.insertarUnidad(unidadDTO);
+    }
     @PostMapping
     public ResponseEntity<Unidad> agregarUnidad(@RequestBody Unidad unidad) {
         return servicioUnidad.agregarUnidad(unidad);

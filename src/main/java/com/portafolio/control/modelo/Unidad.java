@@ -15,6 +15,18 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "SP_INSERTAR_UNIDAD",
+                procedureName = "SP_INSERTAR_UNIDAD",
+                parameters = {
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_NOMBRE", type=String.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_DESCRIPCION", type=String.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_FUNCION", type=String.class),
+                        @StoredProcedureParameter(mode= ParameterMode.IN, name="P_ID_EMPRESA", type=Long.class)
+                }
+        )
+})
 public class Unidad {
     @Id
     @Column(name = "id_unidad")

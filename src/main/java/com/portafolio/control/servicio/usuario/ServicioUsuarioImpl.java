@@ -107,7 +107,7 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
     }
 
     @Override
-    public ResponseEntity<?> validateCredentials(String email, String password) {
+    public ResponseEntity<Usuario> validateCredentials(String email, String password) {
         Usuario usuario = usuarioRepo.findUsuarioByEmail(email);
         //Match entre la passw raw con la encoded
         try {
@@ -115,8 +115,8 @@ public class ServicioUsuarioImpl implements IServicioUsuario {
                 return ResponseEntity.ok(usuario);
             }
         } catch (Exception e) {
-            return (ResponseEntity<?>) ResponseEntity.status(NOT_FOUND);
+            return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
         }
-        return (ResponseEntity<?>) ResponseEntity.status(NOT_FOUND);
+        return (ResponseEntity<Usuario>) ResponseEntity.status(NOT_FOUND);
     }
 }
